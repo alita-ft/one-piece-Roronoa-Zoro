@@ -1,0 +1,18 @@
+<view class="home">
+  <view>{{latitude}}--{{longitude}}</view>
+  <view class="label"><text style="color:red;">* </text>商户名称：</view>
+  <input class="input" />
+  <view class="label"><text style="color:red;">* </text>商户负责人手机号码：</view>
+  <input class="input" type="number" />
+  <view class="label"><text style="color:red;">* </text>我行产品：</view>
+  <input class="input" />
+  <view class="label"><text style="color:red;">* </text>所属支行：</view>
+  <view style="border-radius: 10rpx;overflow: hidden;margin-top:10rpx;">
+    <van-dropdown-menu>
+      <van-dropdown-item value="{{0}}" options="{{option1}}" />
+    </van-dropdown-menu>
+  </view>
+  <view class="label"><text style="color:red;">* </text>走访备注：</view>
+  <textarea class="input textarea" placeholder="..." />
+  <button id="submit">提交</button>
+  </view>

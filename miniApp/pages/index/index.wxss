@@ -1,0 +1,36 @@
+.home {
+  background: #48C2F0;
+  padding: 30rpx 40rpx;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.home .address {
+  text-align: center;
+}
+
+.label {
+  margin-top: 40rpx;
+}
+
+.input {
+  background: #fff;
+  padding: 20rpx;
+  color: #a3a3a3;
+  border-radius: 10rpx;
+  margin-top: 10rpx;
+  font-size: 32rpx;
+
+}
+
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#submit {
+  margin-top: 40rpx;
+  width: 100%;
+  
+}
