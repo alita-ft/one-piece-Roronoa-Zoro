@@ -8,16 +8,40 @@ Page({
       { text: '支行1', value: 0 },
       { text: '支行2', value: 1 },
       { text: '支行3', value: 2 },
-      { text: '支行4', value: 2 },
-      { text: '支行5', value: 2 },
-      { text: '支行6', value: 2 },
-      { text: '支行7', value: 2 },
-      { text: '支行8', value: 2 },
-      { text: '支行9', value: 2 },
-      { text: '支行10', value: 2 },
+      { text: '支行4', value: 3 },
+      { text: '支行5', value: 4 },
+      { text: '支行6', value: 5 },
+      { text: '支行7', value: 6 },
+      { text: '支行8', value: 7 },
+      { text: '支行9', value: 8 },
+      { text: '支行10', value: 9 },
     ],
     latitude: 0,
-    longitude: 0
+    longitude: 0,
+    products: [
+      { name: '个人储蓄', checked: true },
+      { name: '个人理财', checked: false },
+      { name: '基金', checked: false },
+      { name: '保险', checked: false },
+      { name: '贵金属', checked: false },
+      { name: '手机银行', checked: false },
+      { name: '个人网银', checked: false },
+      { name: '企业银行', checked: false },
+      { name: '聚合支付', checked: false },
+      { name: '消费贷', checked: false },
+      { name: '经营贷', checked: false },
+      { name: '对公存款', checked: false }
+    ]
+  },
+
+
+  checkProduct(e){
+      console.log(e.currentTarget.dataset);
+      let {index,checked} = e.currentTarget.dataset
+      this.data.products[index].checked = !checked
+      this.setData({
+        products:this.data.products
+      })
   },
 
   /**
