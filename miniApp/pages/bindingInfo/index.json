@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-dropdown-menu": "/UI/dist/dropdown-menu/index",
+    "van-dropdown-item": "/UI/dist/dropdown-item/index",
+    "van-cell": "/UI/dist/cell/index",
+    "van-cell-group": "/UI/dist/cell-group/index"
+  }
+}
