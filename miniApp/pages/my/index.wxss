@@ -1,0 +1,54 @@
+.my {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #1ACFAC;
+}
+
+.my .userInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 0 160rpx 0;
+  color: #fff;
+}
+
+.userInfo .userAvatarUrl {
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.userInfo .userNickName {}
+
+.my .userActive {
+  flex: 1;
+  background: #f6f6f6;
+  border-radius: 30rpx 30rpx 0 0;
+  overflow: hidden;
+}
+.userActive .item {
+  padding: 34rpx;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 8rpx;
+}
+.item .left {
+  font-size: 36rpx;
+  color: #1ACFAC;
+}
+.item .text {
+  color: #252525;
+  margin-left: 44rpx;
+  font-size: 30rpx;
+  font-family: PingFang, PingFang-SC;
+  font-weight: SC;
+}
+
+.item .right {
+  color: #ddd;
+  margin-left: auto;
+}

@@ -1,22 +1,41 @@
 <view class="home">
-  <view>{{latitude}}--{{longitude}}</view>
-  <view class="label"><text style="color:red;">* </text>商户名称：</view>
-  <input class="input" />
-  <view class="label"><text style="color:red;">* </text>商户负责人手机号码：</view>
-  <input class="input" type="number" />
-  <view class="label"><text style="color:red;">* </text>我行产品：</view>
-  <view class="products">
-    <view class="product {{item.checked?'active':''}}" wx:for="{{products}}" data-index="{{index}}" data-checked="{{item.checked}}" bindtap="checkProduct">
-      {{item.name}}
+  <swiper indicator-dots autoplay>
+    <block wx:for="{{banner}}">
+      <swiper-item>
+        <view class="swiper-item">
+          <image src="{{item.url}}" mode="aspectFill"></image>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="message">
+    <view class="msg-info">
+      <view class="left">
+        <text class="iconfont icon-tongzhi"></text>
+      </view>
+      <view class="right">
+        <text>在线小程序上线了</text>
+      </view>
     </view>
   </view>
-  <view class="label"><text style="color:red;">* </text>所属支行：</view>
-  <view style="border-radius: 10rpx;overflow: hidden;margin-top:10rpx;">
-    <van-dropdown-menu>
-      <van-dropdown-item value="{{0}}" options="{{option1}}" />
-    </van-dropdown-menu>
+
+  <view class="list">
+    <view class="line">
+      <view class="list-item" wx:for="{{list.line1}}">
+        <view class="item-top" style="background:{{item.bgc}}">
+          <image src="/imgs/list/{{item.img}}"></image>
+        </view>
+        <view class="item-text">{{item.name}}</view>
+      </view>
+    </view>
+
+    <view class="line">
+      <view class="list-item" wx:for="{{list.line2}}">
+        <view class="item-top" style="background:{{item.bgc}}">
+          <image src="/imgs/list/{{item.img}}"></image>
+        </view>
+        <view class="item-text">{{item.name}}</view>
+      </view>
+    </view>
   </view>
-  <view class="label"><text style="color:red;">* </text>走访备注：</view>
-  <textarea class="input textarea" placeholder="..." />
-  <button id="submit">提交</button>
-  </view>
+</view>

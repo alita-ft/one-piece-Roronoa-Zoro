@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "van-dropdown-menu": "/UI/dist/dropdown-menu/index",
+  "van-dropdown-item": "/UI/dist/dropdown-item/index"
+  }
+}

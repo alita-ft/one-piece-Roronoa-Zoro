@@ -1,0 +1,8 @@
+<view>
+  <van-cell-group>
+    <van-cell title="所在组织" value="组织007" />
+    <van-cell title="姓名" value="姓名." />
+    <van-cell title="手机号" value="12300001111" />
+    <van-cell title="工号" value="GH001" />
+  </van-cell-group>
+</view>
