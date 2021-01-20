@@ -3,9 +3,10 @@ import { Layout } from 'antd'
 import SlideMenu from "./SlideMenu";
 import Logo from '../../assets/logo.jpg'
 import { getToken } from '../../utils/auth'
-import { Redirect, Switch, Route } from 'react-router-dom';
+import { Redirect, Switch, Route, withRouter } from 'react-router-dom';
 
 import Welcome from "../../pages/Welcome";
+import List from "../../pages/List/list";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -22,13 +23,14 @@ function Frame(props) {
       </Header>
       <Layout>
         <Sider width={256} theme='dark'>
-          <SlideMenu />
+          <SlideMenu {...props}/>
         </Sider>
         <Layout>
           <Content>
             <Switch>
               <Redirect from='/' exact to='/home' />
               <Route path='/home' component={Welcome} />
+              <Route path='/list' component={List} />
             </Switch>
           </Content>
           <Footer style={{ background: '#ccc', textAlign: 'center' }}>

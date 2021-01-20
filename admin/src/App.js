@@ -1,7 +1,7 @@
 import Frame from './components/Frame'
 import Login from './pages/Login'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <Switch>

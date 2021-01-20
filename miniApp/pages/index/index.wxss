@@ -41,12 +41,16 @@
   border-radius: 8rpx;
   background: #fff;
   color: #3b3b3b;
+  border: 1px solid #48C2F0;
 }
 .products .active {
   color: #2778fe;
   border: 1px solid #2778fe;
 }
-
+.textarea {
+width: 100%;
+box-sizing: border-box;
+}
 #submit {
   margin-top: 40rpx;
   width: 100%;

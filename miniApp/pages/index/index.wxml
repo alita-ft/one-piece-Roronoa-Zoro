@@ -12,7 +12,7 @@
   </view>
   <view class="label"><text style="color:red;">* </text>所属支行：</view>
   <view style="border-radius: 10rpx;overflow: hidden;margin-top:10rpx;">
-    <van-dropdown-menu>
+    <van-dropdown-menu direction="up">
       <van-dropdown-item value="{{0}}" options="{{option1}}" />
     </van-dropdown-menu>
   </view>

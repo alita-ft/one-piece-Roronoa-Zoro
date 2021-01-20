@@ -4,6 +4,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { setToken } from "../../utils/auth";
 import './login.css'
 function Login(props) {
+    console.log(props);
     const rules = {
         username: [{ required: true, message: '请输入账号' }],
         password: [{ required: true, message: '请输入密码' }]

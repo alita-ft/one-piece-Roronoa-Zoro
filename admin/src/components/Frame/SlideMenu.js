@@ -6,13 +6,17 @@ import {
     MailOutlined,
 } from '@ant-design/icons';
 const { SubMenu } = Menu;
-function SlideMenu(params) {
+function SlideMenu(props) {
+    function onSelect({ key }) {
+        
+    }
     return (
         <Menu
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
             mode="inline"
             theme="dark"
+            onSelect={onSelect}
         >
             <Menu.Item key="1" icon={<PieChartOutlined />}>
                 首页

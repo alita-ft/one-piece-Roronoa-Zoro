@@ -1,7 +1,14 @@
 // app.js
 App({
   onLaunch() {
-    // 展示本地存储能力
+
+    wx.request({
+      url: 'http://101.37.65.155/api/sabo/wx/hello',
+      success:(res)=>{
+        console.log();
+        
+      }
+    })
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
