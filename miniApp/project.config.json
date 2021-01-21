@@ -50,14 +50,6 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -70,9 +62,14 @@
     "miniprogram": {
       "list": [
         {
-          "id": -1,
-          "name": "pages/bindingInfo/index",
-          "pathName": "pages/bindingInfo/index",
+          "name": "pages/userInfo/index",
+          "pathName": "pages/userInfo/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/my/index",
+          "pathName": "pages/my/index",
           "scene": null
         }
       ]

@@ -3,8 +3,7 @@
     "pages/index/index",
     "pages/form/index",
     "pages/my/index",
-    "pages/my/myInfo/index",
-    "pages/bindingInfo/index"
+    "pages/userInfo/index"
 
   ],
   "window":{

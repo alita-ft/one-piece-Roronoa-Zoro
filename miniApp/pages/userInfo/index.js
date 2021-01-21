@@ -1,4 +1,5 @@
 // pages/bindingInfo/index.js
+const app = getApp()
 Page({
 
   /**
@@ -12,17 +13,24 @@ Page({
       {text:'商品4',value:3},
       {text:'商品5',value:4},
       {text:'商品6',value:5},
-    ]
+    ],
+    userInfo:{}
   },
   dropdownChange(e){
     console.log(e);
+  },
+  submit(){
+    app.globalData.userInfo.name= 'qqwwee'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if(options.id){
+      this.setData({
+      })
+    }
   },
 
   /**

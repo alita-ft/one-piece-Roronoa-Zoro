@@ -1,0 +1,44 @@
+<view class="userInfo">
+  <view class="tr">
+    <view class="left">下拉框</view>
+    <view class="right">
+      <van-dropdown-menu>
+        <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+      </van-dropdown-menu>
+    </view>
+  </view>
+
+  <view class="tr">
+    <view class="left">姓名</view>
+    <view class="right">
+      <van-field value="{{ value }}" placeholder="请输入用户名" border="{{ false }}" bind:change="onChange" />
+    </view>
+  </view>
+
+  <view class="tr">
+    <view class="left">手机号</view>
+    <view class="right">
+      <van-field value="{{ value }}" placeholder="请输入手机号" border="{{ false }}" bind:change="onChange" />
+    </view>
+  </view>
+
+  <view class="tr">
+    <view class="left">code</view>
+    <view class="right">
+      <van-field value="{{ value }}" placeholder="请输入code" border="{{ false }}" bind:change="onChange" />
+    </view>
+  </view>
+
+  <view class="tr">
+    <view class="left">code</view>
+    <view class="right">
+      <van-field custom-style="color:#252525" value="{{ 'qqweerrr' }}" placeholder="请输入code" border="{{ false }}" readonly="{{true}}" bind:change="onChange" />
+    </view>
+  </view>
+
+  <view class="submit" wx:if="{{!userInfo.id}}">
+    <van-button color='#1ACFAC' bind:click="submit">保存</van-button>
+  </view>
+
+
+</view>

@@ -1,22 +1,31 @@
 // pages/my/index.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    bindInfo:false
+    bindInfo: false,
+    userInfo: {}
 
   },
-  myItem(e) {
-    let {item} = e.currentTarget.dataset
-    switch (item) {
-      case 'info':
+  toInfo(e) {
+    let { type } = e.currentTarget.dataset
+    console.log(type);
+    switch (type) {
+      case 'search':
         wx.navigateTo({
-          url: '/pages/my/myInfo/index',
+          url: '/pages/userInfo/index?id=1',
         })
         break;
-    
+
+      case 'edit':
+        wx.navigateTo({
+          url: '/pages/userInfo/index',
+        })
+        break;
+
       default:
         break;
     }
@@ -40,7 +49,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log(app.globalData.userInfo);
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
   },
 
   /**
