@@ -13,6 +13,7 @@ const request = (url, data, method, header) => {
       header,
       method,
       success(response) {
+        wx.hideLoading();
         switch (response.statusCode) {
           case 401:
             console.log('您的身份认证已过期');

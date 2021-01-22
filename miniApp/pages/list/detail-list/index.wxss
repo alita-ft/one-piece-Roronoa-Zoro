@@ -4,7 +4,7 @@ page {
 }
 
 .list {
-  padding: 30rpx 30rpx 0 30rpx;
+  padding: 30rpx 30rpx 80rpx 30rpx;
 }
 
 .card {
@@ -45,4 +45,14 @@ page {
   right: 5rpx;
   transform: translateY(-50%);
   color: #3b3b3b;
+}
+
+.addUser {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10rpx 0;
+  background: #fff;
 }
