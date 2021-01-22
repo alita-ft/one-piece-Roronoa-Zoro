@@ -1,9 +1,9 @@
 <view class="userInfo">
   <view class="tr">
-    <view class="left">下拉框</view>
+    <view class="left">所属支行</view>
     <view class="right">
       <van-dropdown-menu>
-        <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+        <van-dropdown-item value="{{ userInfo.unitValue || 1 }}" options="{{ unitList }}" disabled="{{disabled}}" bind:change="onChange" data-type="unit"/>
       </van-dropdown-menu>
     </view>
   </view>
@@ -11,33 +11,30 @@
   <view class="tr">
     <view class="left">姓名</view>
     <view class="right">
-      <van-field value="{{ value }}" placeholder="请输入用户名" border="{{ false }}" bind:change="onChange" />
+      <van-field value="{{ userInfo.name }}" placeholder="请输入用户名" border="{{ false }}" bind:change="onChange" data-type="name"
+        readonly="{{disabled}}" />
     </view>
   </view>
 
   <view class="tr">
     <view class="left">手机号</view>
     <view class="right">
-      <van-field value="{{ value }}" placeholder="请输入手机号" border="{{ false }}" bind:change="onChange" />
+      <van-field type="number" maxlength="{{11}}" value="{{ userInfo.phoneNumber }}" placeholder="请输入手机号" border="{{ false }}" bind:change="onChange" data-type="phoneNumber"
+        readonly="{{disabled}}" />
     </view>
   </view>
 
   <view class="tr">
-    <view class="left">code</view>
+    <view class="left">工号</view>
     <view class="right">
-      <van-field value="{{ value }}" placeholder="请输入code" border="{{ false }}" bind:change="onChange" />
+      <van-field value="{{ userInfo.code }}" placeholder="请输入工号" border="{{ false }}" bind:change="onChange" data-type="code"
+        readonly="{{disabled}}" />
     </view>
   </view>
 
-  <view class="tr">
-    <view class="left">code</view>
-    <view class="right">
-      <van-field custom-style="color:#252525" value="{{ 'qqweerrr' }}" placeholder="请输入code" border="{{ false }}" readonly="{{true}}" bind:change="onChange" />
-    </view>
-  </view>
-
-  <view class="submit" wx:if="{{!userInfo.id}}">
-    <van-button color='#1ACFAC' bind:click="submit">保存</van-button>
+  <view class="submit" wx:if="{{submit}}">
+    <van-button color='#1ACFAC' bind:click="handleSubmit" data-type="edit" wx:if="{{submitType==1}}">修改信息</van-button>
+    <van-button color='#1ACFAC' bind:click="handleSubmit" data-type="save" wx:if="{{submitType==2}}">保存</van-button>
   </view>
 
 

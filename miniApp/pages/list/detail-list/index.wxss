@@ -1,0 +1,48 @@
+/* pages/list/index.wxss */
+page {
+  box-sizing: border-box;
+}
+
+.list {
+  padding: 30rpx 30rpx 0 30rpx;
+}
+
+.card {
+  height: 160rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0px 2px 12px 0px rgba(152, 161, 172, 0.35);
+  position: relative;
+  padding: 10rpx;
+  margin-bottom: 30rpx;
+}
+
+.card .info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.info .name {
+  color: #27282A;
+  font-size: 32rpx;
+}
+
+.info .user {
+  color: #888888;
+  font-size: 28rpx;
+}
+
+.info .time {
+  color: #888888;
+  font-size: 22rpx;
+}
+
+.icon-xiangyou {
+  position: absolute;
+  top: 50%;
+  right: 5rpx;
+  transform: translateY(-50%);
+  color: #3b3b3b;
+}

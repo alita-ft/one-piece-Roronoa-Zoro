@@ -4,23 +4,62 @@ Page({
    * 页面的初始数据
    */
   data: {
-    banner:[
-      {url:'/imgs/banner/111.png'},
-      {url:'/imgs/banner/222.jpg'},
-      {url:'/imgs/banner/333.jpg'},
+    banner: [
+      { url: '/imgs/banner/111.png' },
+      { url: '/imgs/banner/222.jpg' },
+      { url: '/imgs/banner/333.jpg' },
     ],
     list: {
       line1: [
-        { img: 'user.png', name: '成员管理', bgc: '#FFB36E' },
-        { img: 'form.png', name: '添加表单', bgc: '#D0E073' },
-        { img: 'report.png', name: '查看报表', bgc: '#37C2FF' },
-        { img: 'permissions.png', name: '权限管理', bgc: '#46DCE0' },
-        { img: 'user.png', name: '考试排名', bgc: '#FFAA5F' },
+        { type: "user", img: 'user.png', name: '查看人员', bgc: '#FFB36E' },
+        { type: "log", img: 'report.png', name: '查看记录', bgc: '#37C2FF' },
+        { type: "add", img: 'form.png', name: '添加记录', bgc: '#D0E073' },
+        { type: "export", img: 'report.png', name: '导出记录', bgc: '#FE8419' },
+        { type: "about", img: 'about.png', name: '关于我们', bgc: '#FF99BB' },
       ],
       line2: [
-        { img: 'report.png', name: '报表导出', bgc: '#FE8419' },
-        { img: 'about.png', name: '关于我们', bgc: '#FF99BB' },
+
+        { img: 'permissions.png', name: '权限管理', bgc: '#46DCE0' },
+        { img: 'user.png', name: '考试排名', bgc: '#FFAA5F' },
       ]
+    }
+  },
+
+  checkType(e) {
+    let { type } = e.currentTarget.dataset
+    let unitListURL = '/pages/list/unit/index'
+    let userListURL = '/pages/list/unit/index'
+    console.log(type);
+    switch (type) {
+      // 查看人员
+      case 'user':
+        wx.navigateTo({
+          url: '/pages/list/unit/index?type=user',
+        })
+        break;
+      // 查看记录
+      case 'log':
+        wx.navigateTo({
+          url: '/pages/list/unit/index?type=log',
+        })
+        break;
+      // 添加记录
+      case 'add':
+        wx.navigateTo({
+          url: '/pages/form/index?type=add',
+        })
+        break;
+      // 导出记录
+      case 'export':
+
+        break;
+      // 关于我们
+      case 'about':
+
+        break;
+
+      default:
+        break;
     }
   },
 

@@ -1,10 +1,11 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/list/unit/index",
+    "pages/list/detail-list/index",
     "pages/form/index",
     "pages/my/index",
     "pages/userInfo/index"
-
   ],
   "window":{
     "backgroundTextStyle":"light",

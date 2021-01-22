@@ -1,33 +1,24 @@
-// pages/my/index.js
-const app = getApp()
+// pages/list/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    bindInfo: false,
-    userInfo: {}
-
+    type: 'user',
+    unitValue: ''
   },
-  toInfo(e) {
-    let { type } = e.currentTarget.dataset
-    console.log(type);
-    switch (type) {
-      case 'search':
-        wx.navigateTo({
-          url: '/pages/userInfo/index?from=detail',
-        })
-        break;
 
-      case 'edit':
-        wx.navigateTo({
-          url: '/pages/userInfo/index?from=binding',
-        })
-        break;
-
-      default:
-        break;
+  toDetail(){
+    console.log(this.data.type);
+    if(this.data.type == 'user'){
+      wx.navigateTo({
+        url: '/pages/userInfo/index?id=1&from=list',
+      })
+    }else if(this.data.type == 'log'){
+      wx.navigateTo({
+        url: '/pages/form/index?id=1',
+      })
     }
   },
 
@@ -35,7 +26,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      type: options.type,
+      unitValue: options.value
+    })
   },
 
   /**
@@ -49,10 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(app.globalData.userInfo);
-    this.setData({
-      userInfo: app.globalData.userInfo
-    })
+
   },
 
   /**

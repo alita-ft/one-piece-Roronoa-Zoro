@@ -1,5 +1,5 @@
 .home {
-  background: #48C2F0;
+  background: #f6f6f6;
   padding: 30rpx 40rpx;
   height: 100%;
   box-sizing: border-box;
@@ -12,7 +12,7 @@
 
 .label {
   margin-top: 40rpx;
-  color: #fff;
+  color: #252525;
 }
 
 .input {
@@ -41,14 +41,26 @@
   border-radius: 8rpx;
   background: #fff;
   color: #3b3b3b;
+  border: 1px solid #f6f6f6;
 }
+
 .products .active {
   color: #2778fe;
   border: 1px solid #2778fe;
+}
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #submit {
   margin-top: 40rpx;
   width: 100%;
+  background: #FE8419;
+  color: #fff;
 
+}
+
+#dropdown .van-dropdown-item {
+  top: 0 !important;
 }

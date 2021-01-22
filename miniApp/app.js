@@ -20,6 +20,7 @@ App({
       name:'',
       phone:'',
       code:'',
+      owner:''
     }
   }
 })

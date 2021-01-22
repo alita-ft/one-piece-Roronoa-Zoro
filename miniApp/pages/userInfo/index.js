@@ -1,35 +1,96 @@
 // pages/bindingInfo/index.js
 const app = getApp()
+import unitList from '../../utils/unitList'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    option1:[
-      {text:'商品1',value:0},
-      {text:'商品2',value:1},
-      {text:'商品3',value:2},
-      {text:'商品4',value:3},
-      {text:'商品5',value:4},
-      {text:'商品6',value:5},
-    ],
-    userInfo:{}
+    disabled: true,
+    submit: true,
+    submitType: 1,
+    unitList,
+    userID: '',
+    userInfo: {}
   },
-  dropdownChange(e){
-    console.log(e);
+  onChange(e) {
+    let { type } = e.currentTarget.dataset
+    // type: unit、name、phoneNumber、code
+    let detail = e.detail
+    console.log(type, detail);
+    this.data.userInfo[type] = detail
+    // switch (type) {
+    //   case 'unit':
+    //     this.data.userInfo
+    //     break;
+    //   case 'name':
+    //     break;
+    //   case 'phoneNumber':
+    //     break;
+    //   case 'code':
+    //     break;
+    //   default:
+    //     break;
+    // }
   },
-  submit(){
-    app.globalData.userInfo.name= 'qqwwee'
+  handleSubmit(e) {
+    let { type } = e.currentTarget.dataset
+    // type:  edit 、 save
+    switch (type) {
+      case 'edit':
+        this.setData({
+          disabled: false,
+          submitType: 2
+        })
+        break;
+      case 'save':
+        this.setData({
+          disabled: true,
+          submitType: 1
+        })
+
+        console.log(this.data.userInfo);
+        break;
+
+      default:
+        break;
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options.id){
-      this.setData({
-      })
+    // from:detail 仅查看、 bindind 绑定、 list 可修改
+    let { from, id } = options
+    let userInfo = {
+      name: '小强',
+      phoneNumber: '12300001111',
+      code: 'GH00001',
+      unitValue: 1
+    }
+
+    switch (from) {
+      case 'list':
+        this.setData({
+          userInfo
+        })
+        break;
+      case 'detail':
+        this.setData({
+          userInfo,
+          submit:false
+        })
+        break;
+      case 'binding':
+        this.setData({
+          disabled:false,
+          submitType:2
+        })
+        break;
+      default:
+        break;
     }
   },
 

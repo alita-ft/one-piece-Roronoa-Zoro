@@ -1,41 +1,22 @@
-// pages/my/index.js
-const app = getApp()
+// pages/list/unit/index.js
+import unitList from '../../../utils/unitList'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    bindInfo: false,
-    userInfo: {}
-
-  },
-  toInfo(e) {
-    let { type } = e.currentTarget.dataset
-    console.log(type);
-    switch (type) {
-      case 'search':
-        wx.navigateTo({
-          url: '/pages/userInfo/index?from=detail',
-        })
-        break;
-
-      case 'edit':
-        wx.navigateTo({
-          url: '/pages/userInfo/index?from=binding',
-        })
-        break;
-
-      default:
-        break;
-    }
+    unitList,
+    type: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      type: options.type
+    })
   },
 
   /**
@@ -49,10 +30,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(app.globalData.userInfo);
-    this.setData({
-      userInfo: app.globalData.userInfo
-    })
+
   },
 
   /**

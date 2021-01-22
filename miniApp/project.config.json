@@ -66,11 +66,6 @@
           "pathName": "pages/userInfo/index",
           "query": "",
           "scene": null
-        },
-        {
-          "name": "pages/my/index",
-          "pathName": "pages/my/index",
-          "scene": null
         }
       ]
     }

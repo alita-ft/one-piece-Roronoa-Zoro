@@ -1,0 +1,22 @@
+<view class="list">
+  <block wx:if="{{type == 'user'}}">
+    <view class="card" wx:for="{{[1,1,1,1]}}" bindtap="toDetail">
+      <view class="info">
+        <view class="name">姓名：小强</view>
+        <view class="user">工号：GH123456</view>
+      </view>
+      <text class="iconfont icon-xiangyou"></text>
+    </view>
+  </block>
+
+  <block wx:if="{{type == 'log'}}">
+    <view class="card" wx:for="{{[1,1,1,1]}}" bindtap="toDetail">
+      <view class="info">
+        <view class="name">走访商户：XXX商户</view>
+        <view class="user">走访人：小强</view>
+        <view class="time">走访时间：2021-1-21 14:27:08</view>
+      </view>
+      <text class="iconfont icon-xiangyou"></text>
+    </view>
+  </block>
+</view>

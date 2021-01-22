@@ -8,7 +8,7 @@
       </swiper-item>
     </block>
   </swiper>
-  <view class="message">
+  <!-- <view class="message">
     <view class="msg-info">
       <view class="left">
         <text class="iconfont icon-tongzhi"></text>
@@ -17,11 +17,11 @@
         <text>在线小程序上线了</text>
       </view>
     </view>
-  </view>
+  </view> -->
 
   <view class="list">
     <view class="line">
-      <view class="list-item" wx:for="{{list.line1}}">
+      <view class="list-item" wx:for="{{list.line1}}" bindtap="checkType" data-type="{{item.type}}">
         <view class="item-top" style="background:{{item.bgc}}">
           <image src="/imgs/list/{{item.img}}"></image>
         </view>

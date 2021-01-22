@@ -1,0 +1,7 @@
+<view class="unit-list">
+  <van-cell-group>
+    <block wx:for="{{unitList}}">
+      <van-cell is-link title="{{item.text}}" link-type="navigateTo" url="/pages/list/detail-list/index?value={{item.value}}&type={{type}}" />
+    </block>
+  </van-cell-group>
+</view>
