@@ -6,30 +6,44 @@ Page({
    */
   data: {
     type: 'user',
-    unitValue: ''
+    bankId: ''
   },
 
-  toDetail(){
-    console.log(this.data.type);
-    if(this.data.type == 'user'){
+  toDetail() {
+    if (this.data.type == 'user') {
       wx.navigateTo({
-        url: '/pages/userInfo/index?id=1&from=list',
+        url: '/pages/userInfo/index?userId=1&from=edit',
       })
-    }else if(this.data.type == 'log'){
+    } else if (this.data.type == 'form') {
       wx.navigateTo({
         url: '/pages/form/index?id=1',
       })
     }
   },
-  addUser(){},
+  addUser(e) {
+    let { addtype } = e.currentTarget.dataset
+
+    wx.navigateTo({
+      url: `/pages/userInfo/index?from=add&addtype=${addtype}`,
+    })
+  },
+  getList() {
+    console.log('list');
+
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let { bankId, type } = options
+    // type：user 、 form
+    wx.setNavigationBarTitle({
+      title: type == 'user' ? '用户列表' : '拜访列表'
+    })
     this.setData({
-      type: options.type,
-      unitValue: options.value
+      type,
+      bankId
     })
   },
 

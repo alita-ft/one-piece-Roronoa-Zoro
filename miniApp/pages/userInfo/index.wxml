@@ -1,41 +1,48 @@
 <view class="userInfo">
-  <view class="tr">
+  <view class="tr" wx:if="{{!from=='binding'||from=='detail'||from=='add'||from=='edit'}}">
     <view class="left">所属支行</view>
     <view class="right">
-      <van-dropdown-menu>
-        <van-dropdown-item value="{{ userInfo.unitValue || 1 }}" options="{{ unitList }}" disabled="{{disabled}}" bind:change="onChange" data-type="unit"/>
-      </van-dropdown-menu>
+      <!-- <block wx:if="{{from == 'add'}}">
+        <van-dropdown-menu>
+          <van-dropdown-item value="{{ userInfo.bankId}}" options="{{ unitList }}" disabled="{{disabled}}"
+            bind:change="onChange" data-type="bankId" />
+        </van-dropdown-menu>
+      </block>
+
+      <block wx:elif="{{from == 'edit'}}">
+        <van-field value="中心支行" border="{{ false }}" readonly="{{true}}" />
+      </block> -->
+
+      <van-field value="中心支行" border="{{ false }}" readonly="{{true}}" />
+
     </view>
   </view>
 
-  <view class="tr">
+  <view class="tr" wx:if="{{!from=='binding'||from=='detail'||from=='add'||from=='edit'}}">
     <view class="left">姓名</view>
     <view class="right">
-      <van-field value="{{ userInfo.name }}" placeholder="请输入用户名" border="{{ false }}" bind:change="onChange" data-type="name"
-        readonly="{{disabled}}" />
+      <van-field value="{{ userInfo.userName }}" placeholder="请输入用户名" border="{{ false }}" bind:change="onChange"
+        data-type="userName" readonly="{{disabled}}" />
     </view>
   </view>
 
-  <view class="tr">
+  <view class="tr" wx:if="{{!from=='binding'||from=='detail'||from=='add'||from=='edit'}}">
     <view class="left">手机号</view>
     <view class="right">
-      <van-field type="number" maxlength="{{11}}" value="{{ userInfo.phoneNumber }}" placeholder="请输入手机号" border="{{ false }}" bind:change="onChange" data-type="phoneNumber"
-        readonly="{{disabled}}" />
+      <van-field type="number" maxlength="{{11}}" value="{{ userInfo.phone }}" placeholder="请输入手机号" border="{{ false }}"
+        bind:change="onChange" data-type="phone" readonly="{{disabled}}" />
     </view>
   </view>
 
-  <view class="tr">
+  <view class="tr" wx:if="{{from=='binding'||from=='detail'||from=='add'||from=='edit'}}">
     <view class="left">工号</view>
     <view class="right">
-      <van-field value="{{ userInfo.code }}" placeholder="请输入工号" border="{{ false }}" bind:change="onChange" data-type="code"
-        readonly="{{disabled}}" />
+      <van-field value="{{ userInfo.jobNumber }}" placeholder="请输入工号" border="{{ false }}" bind:change="onChange"
+        data-type="jobNumber" readonly="{{disabled}}" />
     </view>
   </view>
 
-  <view class="submit" wx:if="{{submit}}">
-    <van-button color='#1ACFAC' bind:click="handleSubmit" data-type="edit" wx:if="{{submitType==1}}">修改信息</van-button>
-    <van-button color='#1ACFAC' bind:click="handleSubmit" data-type="save" wx:if="{{submitType==2}}">保存</van-button>
+  <view class="submit" wx:if="{{showSubmit}}">
+    <van-button color='#1ACFAC' bind:click="handleSubmit">{{submitText}}</van-button>
   </view>
-
-
 </view>

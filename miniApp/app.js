@@ -1,4 +1,5 @@
 // app.js
+import { getUserInfo1, getUserInfo2 } from './utils/api'
 App({
   onLaunch() {
     // 登录
@@ -10,17 +11,21 @@ App({
           appid: this.globalData.appid,
           code: res.code,
         }
-
+        this.globalData.userInfo = {}
+        // getUserInfo1().then(res => {
+        //   this.globalData.userInfo = res.data.userInfo
+        // })
       }
     });
   },
   globalData: {
-    appid:'wx744dbc627bc27f3c',
+    appid: 'wx744dbc627bc27f3c',
     userInfo: {
-      name:'',
-      phone:'',
-      code:'',
-      owner:''
+      userId: '',
+      userName: '',
+      bankId: '',
+      phone: '',
+      jobNumber: '',
     }
   }
 })

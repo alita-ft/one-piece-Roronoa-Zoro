@@ -1,94 +1,153 @@
 // pages/bindingInfo/index.js
 const app = getApp()
 import unitList from '../../utils/unitList'
+import { getUserInfo2, userInfoById } from '../../utils/api'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    from: '',
+    userId: '',
+    addType:'user',
+
     disabled: true,
-    submit: true,
-    submitType: 1,
+    showSubmit: true,
+    submitText: '修改信息',
     unitList,
-    userID: '',
     userInfo: {}
   },
   onChange(e) {
     let { type } = e.currentTarget.dataset
-    // type: unit、name、phoneNumber、code
     let detail = e.detail
     console.log(type, detail);
     this.data.userInfo[type] = detail
-    // switch (type) {
-    //   case 'unit':
-    //     this.data.userInfo
-    //     break;
-    //   case 'name':
-    //     break;
-    //   case 'phoneNumber':
-    //     break;
-    //   case 'code':
-    //     break;
-    //   default:
-    //     break;
-    // }
   },
-  handleSubmit(e) {
-    let { type } = e.currentTarget.dataset
-    // type:  edit 、 save
-    switch (type) {
+  handleSubmit() {
+    switch (this.data.from) {
+      case 'binding':
+        /* getUserInfo2(this.data.userInfo).then(res => {
+          app.globalData.userInfo = res.data.userInfo
+          wx.showToast({
+            title: '绑定成功',
+            icon: 'success',
+            duration: 1500,
+            success: () => {
+              setTimeout(() => {
+                wx.navigateBack()
+              }, 1500)
+            }
+          })
+        }) */
+
+        app.globalData.userInfo = {
+          userName: '小强',
+          phone: '12300000000',
+          jobNumber: '0001',
+          bankId: '1',
+          role: 0
+        }
+        wx.showToast({
+          title: '绑定成功',
+          icon: 'success',
+          duration: 1500,
+          success: () => {
+            setTimeout(() => {
+              wx.navigateBack()
+            }, 1500)
+          }
+        })
+
+
+        break;
       case 'edit':
-        this.setData({
-          disabled: false,
-          submitType: 2
-        })
-        break;
-      case 'save':
-        this.setData({
-          disabled: true,
-          submitType: 1
-        })
 
-        console.log(this.data.userInfo);
+        if (this.data.disabled) {
+          this.setData({
+            disabled: false,
+            submitText: '保存',
+          })
+          console.log(this.data.userId, this.data.userInfo);
+        } else {
+          console.log(this.data.userId, this.data.userInfo);
+          var pages = getCurrentPages();
+          if (pages.length > 1) {
+            //上一个页面实例对象 
+            var prePage = pages[pages.length - 2];
+            //关键在这里,这里面是触发上个界面的方法 
+            prePage.getList() // 123
+          }
+        }
         break;
-
       default:
         break;
     }
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // from:detail 仅查看、 bindind 绑定、 list 可修改
-    let { from, id } = options
-    let userInfo = {
-      name: '小强',
-      phoneNumber: '12300001111',
-      code: 'GH00001',
-      unitValue: 1
-    }
+    // from:detail 仅查看、 bindind 绑定、 edit 可修改、 add 新增
+    console.log(app.globalData.userInfo);
+    console.log(options);
+
+    let { from, userId } = options
+    this.data.userId = userId
 
     switch (from) {
-      case 'list':
-        this.setData({
-          userInfo
+      case 'edit':
+        wx.setNavigationBarTitle({
+          title: '用户信息',
+        })
+        userInfoById({ userId }).then(res => {
+          this.setData({
+            userInfo: res.data.userInfo,
+            from,
+            disabled: true,
+            showSubmit: true,
+            submitText: '修改信息',
+          })
         })
         break;
-      case 'detail':
+
+      case 'add':
+        wx.setNavigationBarTitle({
+          title: '添加用户',
+        })
         this.setData({
-          userInfo,
-          submit:false
+          from,
+          disabled: false,
+          showSubmit: true,
+          submitText: '添加',
         })
         break;
+
       case 'binding':
+        wx.setNavigationBarTitle({
+          title: '绑定用户',
+        })
         this.setData({
-          disabled:false,
-          submitType:2
+          from,
+          disabled: false,
+          submitText: '绑定信息'
         })
         break;
+
+      case 'detail':
+        wx.setNavigationBarTitle({
+          title: '用户信息',
+        })
+        this.setData({
+          from,
+          disabled: true,
+          showSubmit: false,
+          userInfo: app.globalData.userInfo,
+        })
+        break;
+
       default:
         break;
     }

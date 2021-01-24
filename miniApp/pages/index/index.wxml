@@ -1,6 +1,6 @@
 <view class="home">
-  <swiper indicator-dots autoplay>
-    <block wx:for="{{banner}}">
+  <swiper indicator-dots="{{false}}" autoplay>
+    <block wx:for="{{banner}}" wx:key='index'>
       <swiper-item>
         <view class="swiper-item">
           <image src="{{item.url}}" mode="aspectFill"></image>
@@ -21,7 +21,7 @@
 
   <view class="list">
     <view class="line">
-      <view class="list-item" wx:for="{{list.line1}}" bindtap="checkType" data-type="{{item.type}}">
+      <view class="list-item" wx:for="{{list.line1}}" wx:key='index' bindtap="checkType" data-type="{{item.type}}" data-needbind="{{item.needBind}}">
         <view class="item-top" style="background:{{item.bgc}}">
           <image src="/imgs/list/{{item.img}}"></image>
         </view>
@@ -30,7 +30,7 @@
     </view>
 
     <view class="line">
-      <view class="list-item" wx:for="{{list.line2}}">
+      <view class="list-item" wx:for="{{list.line2}}" wx:key='index'>
         <view class="item-top" style="background:{{item.bgc}}">
           <image src="/imgs/list/{{item.img}}"></image>
         </view>

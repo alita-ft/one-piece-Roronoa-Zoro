@@ -55,7 +55,7 @@
 }
 
 .list .line .list-item {
-  width: 20%;
+  width: 25%;
   padding: 25rpx 0;
   display: flex;
   flex-direction: column;

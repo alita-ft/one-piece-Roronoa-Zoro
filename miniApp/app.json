@@ -10,7 +10,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#1ACFAC",
-    "navigationBarTitleText": "信息收集",
+    "navigationBarTitleText": "拜访管理",
     "navigationBarTextStyle":"white"
   },
   "tabBar": {

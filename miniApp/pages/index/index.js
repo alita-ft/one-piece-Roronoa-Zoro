@@ -1,3 +1,4 @@
+const app = getApp()
 Page({
 
   /**
@@ -5,31 +6,42 @@ Page({
    */
   data: {
     banner: [
-      { url: '/imgs/banner/111.png' },
+      // { url: '/imgs/banner/111.png' },
       { url: '/imgs/banner/222.jpg' },
-      { url: '/imgs/banner/333.jpg' },
+      // { url: '/imgs/banner/333.jpg' },
     ],
     list: {
       line1: [
-        { type: "user", img: 'user.png', name: '查看人员', bgc: '#FFB36E' },
-        { type: "log", img: 'report.png', name: '查看记录', bgc: '#37C2FF' },
-        { type: "add", img: 'form.png', name: '添加记录', bgc: '#D0E073' },
-        { type: "export", img: 'report.png', name: '导出记录', bgc: '#FE8419' },
-        { type: "about", img: 'about.png', name: '关于我们', bgc: '#FF99BB' },
+        { needBind: true, type: "add", img: 'form.png', name: '拜访录入', bgc: '#D0E073' },
+        { needBind: true, type: "form", img: 'report.png', name: '拜访列表', bgc: '#37C2FF' },
+        { needBind: true, type: "export", img: 'report.png', name: '拜访导出', bgc: '#FE8419' },
+        { needBind: true, type: "user", img: 'user.png', name: '用户管理', bgc: '#FFB36E' },
+        // { needBind: true, type: "about", img: 'about.png', name: '关于我们', bgc: '#FF99BB' },
       ],
       line2: [
 
-        { img: 'permissions.png', name: '权限管理', bgc: '#46DCE0' },
-        { img: 'user.png', name: '考试排名', bgc: '#FFAA5F' },
+        // { needBind: true, img: 'permissions.png', name: '权限管理', bgc: '#46DCE0' },
+        // { needBind: true, img: 'user.png', name: '考试排名', bgc: '#FFAA5F' },
       ]
     }
   },
 
   checkType(e) {
-    let { type } = e.currentTarget.dataset
-    let unitListURL = '/pages/list/unit/index'
-    let userListURL = '/pages/list/unit/index'
-    console.log(type);
+    let { type,needbind } = e.currentTarget.dataset
+    
+    if(needbind && !app.globalData.userInfo.userName){
+      wx.showModal({
+        title: '提示',
+        content: '您还为绑定个人信息，请到【我的】-【信息认证】进行绑定',
+        showCancel: false,
+        confirmText: '确定',
+        success: (result) => {},
+        fail: (res) => {},
+        complete: (res) => {},
+      })
+      return
+    }
+
     switch (type) {
       // 查看人员
       case 'user':
@@ -38,9 +50,9 @@ Page({
         })
         break;
       // 查看记录
-      case 'log':
+      case 'form':
         wx.navigateTo({
-          url: '/pages/list/unit/index?type=log',
+          url: '/pages/list/unit/index?type=form',
         })
         break;
       // 添加记录

@@ -12,23 +12,9 @@ Page({
   },
   toInfo(e) {
     let { type } = e.currentTarget.dataset
-    console.log(type);
-    switch (type) {
-      case 'search':
-        wx.navigateTo({
-          url: '/pages/userInfo/index?from=detail',
-        })
-        break;
-
-      case 'edit':
-        wx.navigateTo({
-          url: '/pages/userInfo/index?from=binding',
-        })
-        break;
-
-      default:
-        break;
-    }
+    wx.navigateTo({
+      url: `/pages/userInfo/index?from=${type}`
+    })
   },
 
   /**

@@ -8,15 +8,15 @@
     </view>
   </view>
   <view class="userActive">
-    <view class="item" bindtap="toInfo" data-type="search" wx:if="{{userInfo.name}}">
+    <view class="item" bindtap="toInfo" data-type="detail" wx:if="{{userInfo.userName}}">
       <text class="iconfont icon-gerenxinxi left"></text>
       <text class="text">个人信息</text>
       <text class="iconfont icon-xiangyou right"></text>
     </view>
 
-    <view class="item" bindtap="toInfo" data-type="edit" wx:else>
+    <view class="item" bindtap="toInfo" data-type="binding" wx:else>
       <text class="iconfont icon-gerenxinxi left"></text>
-      <text class="text">绑定信息</text>
+      <text class="text">信息认证</text>
       <text class="iconfont icon-xiangyou right"></text>
     </view>
 
