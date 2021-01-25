@@ -10,7 +10,7 @@ Page({
   data: {
     from: '',
     userId: '',
-    addType:'user',
+    addType: 'user',
 
     disabled: true,
     showSubmit: true,
@@ -102,15 +102,23 @@ Page({
         wx.setNavigationBarTitle({
           title: '用户信息',
         })
-        userInfoById({ userId }).then(res => {
-          this.setData({
-            userInfo: res.data.userInfo,
-            from,
-            disabled: true,
-            showSubmit: true,
-            submitText: '修改信息',
-          })
+        // userInfoById({ userId }).then(res => {
+        //   this.setData({
+        //     userInfo: res.data.userInfo,
+        //     from,
+        //     disabled: true,
+        //     showSubmit: true,
+        //     submitText: '修改信息',
+        //   })
+        // })
+        this.setData({
+          userInfo: {userName:'小强',phone:'12300000000',jobNumber:'0001'},
+          from,
+          disabled: true,
+          showSubmit: true,
+          submitText: '修改信息',
         })
+
         break;
 
       case 'add':

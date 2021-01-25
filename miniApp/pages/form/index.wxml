@@ -1,5 +1,6 @@
 <view class="home">
-  <view>{{latitude}}--{{longitude}}</view>
+  <!-- <view>{{latitude}}--{{longitude}}</view> -->
+  <view>{{address}}</view>
   <view class="label"><text style="color:red;">* </text>商户名称：</view>
   <input class="input" />
   <view class="label"><text style="color:red;">* </text>商户负责人手机号码：</view>

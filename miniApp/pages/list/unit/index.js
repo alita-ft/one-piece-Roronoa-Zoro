@@ -10,10 +10,30 @@ Page({
     type: ''
   },
 
+  cellClk(e){
+    console.log(e);
+    let bankId = e.currentTarget.dataset.id
+    // /pages/list/detail-list/index?bankId={{item.value}}&type={{type}}
+    console.log(this.data.type);
+    switch (this.data.type) {
+      case 'export':
+        
+        break;
+    
+      default:
+        wx.navigateTo({
+          url: `/pages/list/detail-list/index?bankId=${bankId}&type=${this.data.type}`,
+        })
+        break;
+    }
+
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     this.setData({
       type: options.type
     })

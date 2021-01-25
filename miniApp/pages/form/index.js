@@ -13,6 +13,7 @@ Page({
     option1: unitList,
     latitude: 0,
     longitude: 0,
+    address: '',
     products: [
       { text: '个人储蓄', checked: true },
       { text: '个人理财', checked: false },
@@ -38,16 +39,6 @@ Page({
       products: this.data.products
     })
   },
-  getLocation() {
-    wx.getLocation({
-      success: (res) => {
-        this.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        })
-      }
-    })
-  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -56,17 +47,14 @@ Page({
     console.log(options);
     let { type } = options
     // type: add 、 detail
-    if (type == 'add') {
-      this.getLocation()
-    } else if (type == 'detail') {
+    // if (type == 'add') {
+    //   this.getLocation()
+    // } else if (type == 'detail') {
 
-    }
+    // }
     wx.getLocation({
       success: (res) => {
-        this.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        })
+
         console.log(res.latitude, res.longitude);
 
         qqmapsdk.reverseGeocoder({
@@ -75,11 +63,14 @@ Page({
             longitude: res.longitude
           },
           success: (res2) => {
-            console.log(res2);
+            console.log(res2.result.address);
+            this.setData({
+              latitude: res.latitude,
+              longitude: res.longitude,
+              address: res2.result.address
+            })
           }
-        }
-
-        )
+        })
       }
     })
 

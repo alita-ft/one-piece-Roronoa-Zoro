@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/list/unit/index",
     "pages/list/detail-list/index",
@@ -7,18 +7,18 @@
     "pages/my/index",
     "pages/userInfo/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#1ACFAC",
-    "navigationBarTitleText": "拜访管理",
-    "navigationBarTextStyle":"white"
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FE8419",
+    "navigationBarTitleText": "走访管理",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color":"#BEBEBE",
-    "selectedColor":"#1ACFAC",
-    "backgroundColor":"#fff",
-    "borderStyle":"white",
-    "list":[
+    "color": "#BEBEBE",
+    "selectedColor": "#FE8419",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "list": [
       {
         "pagePath": "pages/index/index",
         "iconPath": "/imgs/home.png",

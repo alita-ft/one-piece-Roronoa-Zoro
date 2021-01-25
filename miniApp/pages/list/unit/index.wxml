@@ -1,7 +1,9 @@
 <view class="unit-list">
   <van-cell-group>
     <block wx:for="{{unitList}}" wx:key='index'>
-      <van-cell is-link title="{{item.text}}" link-type="navigateTo" url="/pages/list/detail-list/index?bankId={{item.value}}&type={{type}}" />
+      <!-- <van-cell is-link title="{{item.text}}" link-type="navigateTo" url="/pages/list/detail-list/index?bankId={{item.value}}&type={{type}}" /> -->
+
+      <van-cell is-link title="{{item.text}}" data-id="{{item.value}}" bind:click='cellClk' />
     </block>
   </van-cell-group>
 </view>

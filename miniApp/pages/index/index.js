@@ -12,9 +12,9 @@ Page({
     ],
     list: {
       line1: [
-        { needBind: true, type: "add", img: 'form.png', name: '拜访录入', bgc: '#D0E073' },
-        { needBind: true, type: "form", img: 'report.png', name: '拜访列表', bgc: '#37C2FF' },
-        { needBind: true, type: "export", img: 'report.png', name: '拜访导出', bgc: '#FE8419' },
+        { needBind: true, type: "add", img: 'form.png', name: '走访录入', bgc: '#D0E073' },
+        { needBind: true, type: "form", img: 'report.png', name: '走访列表', bgc: '#37C2FF' },
+        { needBind: true, type: "export", img: 'report.png', name: '走访导出', bgc: '#FE8419' },
         { needBind: true, type: "user", img: 'user.png', name: '用户管理', bgc: '#FFB36E' },
         // { needBind: true, type: "about", img: 'about.png', name: '关于我们', bgc: '#FF99BB' },
       ],
@@ -27,17 +27,17 @@ Page({
   },
 
   checkType(e) {
-    let { type,needbind } = e.currentTarget.dataset
-    
-    if(needbind && !app.globalData.userInfo.userName){
+    let { type, needbind } = e.currentTarget.dataset
+
+    if (needbind && !app.globalData.userInfo.userName) {
       wx.showModal({
         title: '提示',
         content: '您还为绑定个人信息，请到【我的】-【信息认证】进行绑定',
         showCancel: false,
         confirmText: '确定',
-        success: (result) => {},
-        fail: (res) => {},
-        complete: (res) => {},
+        success: (result) => { },
+        fail: (res) => { },
+        complete: (res) => { },
       })
       return
     }
@@ -63,7 +63,18 @@ Page({
         break;
       // 导出记录
       case 'export':
-
+        wx.showModal({
+          title: '提示',
+          content: '下载链接：www.xxxx.com',
+          confirmText: '复制',
+          success(res) {
+            if (res.confirm) {
+              wx.setClipboardData({
+                data: 'www.baidu.com',
+              })
+            }
+          }
+        })
         break;
       // 关于我们
       case 'about':

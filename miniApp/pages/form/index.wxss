@@ -45,8 +45,8 @@
 }
 
 .products .active {
-  color: #2778fe;
-  border: 1px solid #2778fe;
+  color: #FE8419;
+  border: 1px solid #FE8419;
 }
 .textarea {
   width: 100%;

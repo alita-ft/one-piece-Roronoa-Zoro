@@ -12,37 +12,28 @@
       <block wx:elif="{{from == 'edit'}}">
         <van-field value="中心支行" border="{{ false }}" readonly="{{true}}" />
       </block> -->
-
       <van-field value="中心支行" border="{{ false }}" readonly="{{true}}" />
-
     </view>
   </view>
-
   <view class="tr" wx:if="{{!from=='binding'||from=='detail'||from=='add'||from=='edit'}}">
     <view class="left">姓名</view>
     <view class="right">
-      <van-field value="{{ userInfo.userName }}" placeholder="请输入用户名" border="{{ false }}" bind:change="onChange"
-        data-type="userName" readonly="{{disabled}}" />
+      <van-field value="{{ userInfo.userName }}" placeholder="请输入用户名" border="{{ false }}" bind:change="onChange" data-type="userName" readonly="{{disabled}}" />
     </view>
   </view>
-
   <view class="tr" wx:if="{{!from=='binding'||from=='detail'||from=='add'||from=='edit'}}">
     <view class="left">手机号</view>
     <view class="right">
-      <van-field type="number" maxlength="{{11}}" value="{{ userInfo.phone }}" placeholder="请输入手机号" border="{{ false }}"
-        bind:change="onChange" data-type="phone" readonly="{{disabled}}" />
+      <van-field type="number" maxlength="{{11}}" value="{{ userInfo.phone }}" placeholder="请输入手机号" border="{{ false }}" bind:change="onChange" data-type="phone" readonly="{{disabled}}" />
     </view>
   </view>
-
   <view class="tr" wx:if="{{from=='binding'||from=='detail'||from=='add'||from=='edit'}}">
     <view class="left">工号</view>
     <view class="right">
-      <van-field value="{{ userInfo.jobNumber }}" placeholder="请输入工号" border="{{ false }}" bind:change="onChange"
-        data-type="jobNumber" readonly="{{disabled}}" />
+      <van-field value="{{ userInfo.jobNumber }}" placeholder="请输入工号" border="{{ false }}" bind:change="onChange" data-type="jobNumber" readonly="{{disabled}}" />
     </view>
   </view>
-
   <view class="submit" wx:if="{{showSubmit}}">
-    <van-button color='#1ACFAC' bind:click="handleSubmit">{{submitText}}</van-button>
+    <van-button color='#FE8419' bind:click="handleSubmit">{{submitText}}</van-button>
   </view>
 </view>
