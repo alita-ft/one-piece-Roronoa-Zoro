@@ -28,7 +28,7 @@ Page({
 
   checkType(e) {
     let { type, needbind } = e.currentTarget.dataset
-
+    console.log(needbind,app.globalData.userInfo);
     if (needbind && !app.globalData.userInfo.userName) {
       wx.showModal({
         title: '提示',

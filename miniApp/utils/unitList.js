@@ -28,7 +28,7 @@ const unitList = [
     value: 7
   },
   {
-    text: '清梅厂支行',
+    text: '梅厂支行',
     value: 8
   },
   {
@@ -123,5 +123,41 @@ const unitList = [
     text: '汊沽港支行',
     value: 31
   },
+  // {
+  //   text: '人力资源部',
+  //   value: 32
+  // },
+  // {
+  //   text: '办公室',
+  //   value: 33
+  // },
+  // {
+  //   text: '财务会计部',
+  //   value: 34
+  // },
+  // {
+  //   text: '特殊资产部',
+  //   value: 35
+  // },
+  // {
+  //   text: '风险管理部',
+  //   value: 36
+  // },
+  // {
+  //   text: '零售银行部',
+  //   value: 37
+  // },
+  // {
+  //   text: '普惠金融部',
+  //   value: 38
+  // },
+  // {
+  //   text: '零售团队',
+  //   value: 39
+  // },
+  // {
+  //   text: '公司银行部',
+  //   value: 40
+  // }
 ]
 module.exports = unitList

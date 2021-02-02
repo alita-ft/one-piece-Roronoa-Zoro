@@ -2,7 +2,7 @@
 const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
 import unitList from '../../utils/unitList'
 var qqmapsdk = new QQMapWX({
-  key: 'X7QBZ-ORDCW-RXRRR-OQYBW-VKJ66-OKBWU'
+  key: 'VO7BZ-HGACJ-MWJFN-KYUZZ-HGXGF-CGBAW'
 });
 Page({
 

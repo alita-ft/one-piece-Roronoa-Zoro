@@ -1,7 +1,7 @@
 // pages/bindingInfo/index.js
 const app = getApp()
 import unitList from '../../utils/unitList'
-import { getUserInfo2, userInfoById } from '../../utils/api'
+import { binding } from '../../utils/api'
 Page({
 
   /**
@@ -27,39 +27,23 @@ Page({
   handleSubmit() {
     switch (this.data.from) {
       case 'binding':
-        /* getUserInfo2(this.data.userInfo).then(res => {
-          app.globalData.userInfo = res.data.userInfo
-          wx.showToast({
-            title: '绑定成功',
-            icon: 'success',
-            duration: 1500,
-            success: () => {
-              setTimeout(() => {
-                wx.navigateBack()
-              }, 1500)
-            }
-          })
-        }) */
-
-        app.globalData.userInfo = {
-          userName: '小强',
-          phone: '12300000000',
-          jobNumber: '0001',
-          bankId: '1',
-          role: 0
-        }
-        wx.showToast({
-          title: '绑定成功',
-          icon: 'success',
-          duration: 1500,
-          success: () => {
-            setTimeout(() => {
-              wx.navigateBack()
-            }, 1500)
+        let data = { ...this.data.userInfo, openid: app.globalData.openid }
+        binding(data).then(res => {
+          console.log(res);
+          if (res.data.code == 0) {
+            app.globalData.userInfo = res.data.userInfo
+            wx.showToast({
+              title: '绑定成功',
+              icon: 'success',
+              duration: 1500,
+              success: () => {
+                setTimeout(() => {
+                  wx.navigateBack()
+                }, 1500)
+              }
+            })
           }
         })
-
-
         break;
       case 'edit':
 
@@ -112,7 +96,7 @@ Page({
         //   })
         // })
         this.setData({
-          userInfo: {userName:'小强',phone:'12300000000',jobNumber:'0001'},
+          userInfo: { userName: '小强', phone: '12300000000', jobNumber: '0001' },
           from,
           disabled: true,
           showSubmit: true,

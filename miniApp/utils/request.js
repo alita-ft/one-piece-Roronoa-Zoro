@@ -1,5 +1,5 @@
 // const baseUrl = 'https://wxinlu.com';   
-const baseUrl = 'http://127.0.0.1:7001';   
+const baseUrl = 'http://localhost:7001';   
 
 const request = (url, data, method, header) => {
   wx.showLoading({
