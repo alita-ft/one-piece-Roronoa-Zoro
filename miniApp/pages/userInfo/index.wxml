@@ -12,7 +12,7 @@
       <block wx:elif="{{from == 'edit'}}">
         <van-field value="中心支行" border="{{ false }}" readonly="{{true}}" />
       </block> -->
-      <van-field value="中心支行" border="{{ false }}" readonly="{{true}}" />
+      <van-field value="{{bankName}}" border="{{ false }}" readonly="{{true}}" />
     </view>
   </view>
   <view class="tr" wx:if="{{!from=='binding'||from=='detail'||from=='add'||from=='edit'}}">

@@ -1,7 +1,10 @@
 // pages/bindingInfo/index.js
 const app = getApp()
 import unitList from '../../utils/unitList'
-import { binding } from '../../utils/api'
+import {
+  binding,
+  editUser
+} from '../../utils/api'
 Page({
 
   /**
@@ -11,6 +14,7 @@ Page({
     from: '',
     userId: '',
     addType: 'user',
+    bankId: '',
 
     disabled: true,
     showSubmit: true,
@@ -19,7 +23,9 @@ Page({
     userInfo: {}
   },
   onChange(e) {
-    let { type } = e.currentTarget.dataset
+    let {
+      type
+    } = e.currentTarget.dataset
     let detail = e.detail
     console.log(type, detail);
     this.data.userInfo[type] = detail
@@ -27,9 +33,21 @@ Page({
   handleSubmit() {
     switch (this.data.from) {
       case 'binding':
-        let data = { ...this.data.userInfo, openid: app.globalData.openid }
+        let data = {
+          ...this.data.userInfo,
+          openId: app.globalData.openid
+        }
         binding(data).then(res => {
           console.log(res);
+
+          if (res.data.status != 0) {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+            })
+            return
+          }
+
           if (res.data.code == 0) {
             app.globalData.userInfo = res.data.userInfo
             wx.showToast({
@@ -64,6 +82,16 @@ Page({
           }
         }
         break;
+
+      case 'add':
+        data = {
+          ...this.data.userInfo,
+          role: this.data.addType == 'user' ? 0 : 1,
+          bankId: this.data.bankId
+        }
+        editUser(data).then(res => {
+          console.log(res);
+        })
       default:
         break;
     }
@@ -78,8 +106,19 @@ Page({
     console.log(app.globalData.userInfo);
     console.log(options);
 
-    let { from, userId } = options
+    let {
+      from,
+      userId,
+      addtype,
+      bankId,
+      bankName
+    } = options
+    this.setData({
+      bankId,
+      bankName
+    })
     this.data.userId = userId
+    this.data.addType = addtype
 
     switch (from) {
       case 'edit':
@@ -96,7 +135,11 @@ Page({
         //   })
         // })
         this.setData({
-          userInfo: { userName: '小强', phone: '12300000000', jobNumber: '0001' },
+          userInfo: {
+            userName: '小强',
+            phone: '12300000000',
+            jobNumber: '0001'
+          },
           from,
           disabled: true,
           showSubmit: true,

@@ -1,5 +1,5 @@
-// const baseUrl = 'https://wxinlu.com';   
-const baseUrl = 'http://localhost:7001';   
+// const baseUrl = 'http://localhost:7001';   
+const baseUrl = 'https://www.wxinlu.com';
 
 const request = (url, data, method, header) => {
   wx.showLoading({
@@ -44,14 +44,14 @@ const request = (url, data, method, header) => {
 
 export const get = (url, data) => request(
   url, data, 'GET', {
-  'content-type': 'application/json',
-  'Authorization': `Bearer ${wx.getStorageSync('token')}`
-}
+    'content-type': 'application/json',
+    'Authorization': `Bearer ${wx.getStorageSync('token')}`
+  }
 );
 
 export const post = (url, data) => request(
   url, data, 'post', {
-  'content-type': 'application/json',
-  'Authorization': `Bearer ${wx.getStorageSync('token')}`
-}
+    'content-type': 'application/json',
+    'Authorization': `Bearer ${wx.getStorageSync('token')}`
+  }
 );

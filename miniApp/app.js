@@ -1,5 +1,10 @@
 // app.js
-import { login } from './utils/api'
+import {
+  login,
+  bankListApi,
+  getUserInfo
+  
+} from './utils/api'
 App({
   onLaunch() {
     // 登录
@@ -10,16 +15,24 @@ App({
         let data = {
           code: res.code,
         }
-        login(data).then(res2=>{
-          console.log(res2);
-          this.globalData.openid = res2.data.openid
-          this.globalData.userInfo = res2.data.userInfo
+        console.log(res.code);
+        login(data).then(res2 => {
+          this.globalData.openid = res2.data.data.openId
+          // this.globalData.userInfo = res2.data.userInfo
+        }).then(()=>{
+          getUserInfo(this.globalData.openid).then(res2=>{
+            this.globalData.userInfo = res2.data.data
+          })
         })
       }
     });
+    bankListApi().then(res => {
+      this.globalData.bankList = res.data.data
+    })
   },
   globalData: {
     appid: 'wx10dd4e7d1a98bc4f',
+    bankList:[],
     userInfo: {
       userId: '',
       userName: '',
@@ -27,6 +40,6 @@ App({
       phone: '',
       jobNumber: '',
     },
-    openid:''
+    openid: ''
   }
 })

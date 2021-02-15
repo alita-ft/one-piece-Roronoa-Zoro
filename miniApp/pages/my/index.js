@@ -13,7 +13,7 @@ Page({
   toInfo(e) {
     let { type } = e.currentTarget.dataset
     wx.navigateTo({
-      url: `/pages/userInfo/index?from=${type}`
+      url: `/pages/userInfo/index?from=${type}&bankName=${this.data.userInfo.bankName}`
     })
   },
 

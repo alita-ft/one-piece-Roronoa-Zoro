@@ -1,28 +1,30 @@
 // pages/list/unit/index.js
 import unitList from '../../../utils/unitList'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    unitList,
+    bankList: [],
     type: ''
   },
 
-  cellClk(e){
+  cellClk(e) {
     console.log(e);
     let bankId = e.currentTarget.dataset.id
+    let bankName = e.currentTarget.dataset.name
     // /pages/list/detail-list/index?bankId={{item.value}}&type={{type}}
     console.log(this.data.type);
     switch (this.data.type) {
       case 'export':
-        
+
         break;
-    
+
       default:
         wx.navigateTo({
-          url: `/pages/list/detail-list/index?bankId=${bankId}&type=${this.data.type}`,
+          url: `/pages/list/detail-list/index?bankName=${bankName}&bankId=${bankId}&type=${this.data.type}`,
         })
         break;
     }
@@ -33,9 +35,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    let bankList = app.globalData.bankList
+    if (app.globalData.userInfo.role == 1) {
+      bankList = app.globalData.bankList.filter(v => v.bankName == app.globalData.userInfo.bankName)
+    }
     this.setData({
-      type: options.type
+      type: options.type,
+      bankList
     })
   },
 

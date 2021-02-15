@@ -1,4 +1,7 @@
 // pages/list/index.js
+import {
+  editUser
+} from '../../../utils/api'
 Page({
 
   /**
@@ -6,25 +9,28 @@ Page({
    */
   data: {
     type: 'user',
-    bankId: ''
+    bankId: '',
+    bankName:''
   },
 
   toDetail() {
     if (this.data.type == 'user') {
       wx.navigateTo({
-        url: '/pages/userInfo/index?userId=1&from=edit',
+        url: `/pages/userInfo/index?bankName=${this.data.bankName}&userId=1&from=edit`,
       })
     } else if (this.data.type == 'form') {
       wx.navigateTo({
-        url: '/pages/form/index?id=1',
+        url: `/pages/form/index?bankName=${this.data.bankName}&id=1`,
       })
     }
   },
   addUser(e) {
-    let { addtype } = e.currentTarget.dataset
+    let {
+      addtype
+    } = e.currentTarget.dataset
 
     wx.navigateTo({
-      url: `/pages/userInfo/index?from=add&addtype=${addtype}`,
+      url: `/pages/userInfo/index?bankName=${this.data.bankName}&bankId=${this.data.bankId}&from=add&addtype=${addtype}`,
     })
   },
   getList() {
@@ -36,14 +42,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let { bankId, type } = options
+    let {
+      bankName,
+      bankId,
+      type
+    } = options
     // type：user 、 form
     wx.setNavigationBarTitle({
-      title: type == 'user' ? '用户列表' : '拜访列表'
+      // title: type == 'user' ? '用户列表' : '拜访列表'
+      title: bankName
     })
     this.setData({
       type,
-      bankId
+      bankId,
+      bankName
     })
   },
 
