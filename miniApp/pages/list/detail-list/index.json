@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "van-button": "/UI/dist/button/index",
-    "van-swipe-cell": "/UI/dist/swipe-cell/index"
+    "van-swipe-cell": "/UI/dist/swipe-cell/index",
+    "van-divider": "/UI/dist/divider/index"
   }
 }

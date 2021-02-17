@@ -14,6 +14,56 @@ Page({
     latitude: 0,
     longitude: 0,
     address: '',
+    // export const ProductInfo = {
+    //   1: {
+    //     productId: 1,
+    //     productName: '个人储蓄',
+    //   },
+    //   2: {
+    //     productId: 2,
+    //     productName: '个人理财',
+    //   },
+    //   3: {
+    //     productId: 3,
+    //     productName: '基金',
+    //   },
+    //   4: {
+    //     productId: 4,
+    //     productName: '保险',
+    //   },
+    //   5: {
+    //     productId: 5,
+    //     productName: '贵金属',
+    //   },
+    //   6: {
+    //     productId: 6,
+    //     productName: '手机银行',
+    //   },
+    //   7: {
+    //     productId: 7,
+    //     productName: '个人网银',
+    //   },
+    //   8: {
+    //     productId: 8,
+    //     productName: '企业银行',
+    //   },
+    //   9: {
+    //     productId: 9,
+    //     productName: '聚合支付',
+    //   },
+    //   10: {
+    //     productId: 10,
+    //     productName: '消费贷',
+    //   },
+    //   11: {
+    //     productId: 11,
+    //     productName: '经营贷',
+    //   },
+    //   12: {
+    //     productId: 12,
+    //     productName: '对公存款',
+    //   },
+    // };
     products: [
       { text: '个人储蓄', checked: true },
       { text: '个人理财', checked: false },
@@ -29,6 +79,8 @@ Page({
       { text: '对公存款', checked: false }
     ]
   },
+
+
 
 
   checkProduct(e) {

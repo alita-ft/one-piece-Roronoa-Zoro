@@ -1,5 +1,6 @@
 // pages/my/index.js
 const app = getApp()
+import {getUserInfo} from '../../utils/api'
 Page({
 
   /**
@@ -35,10 +36,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(app.globalData.userInfo);
-    this.setData({
-      userInfo: app.globalData.userInfo
+    getUserInfo(app.globalData.openId).then(res2=>{
+      app.globalData.userInfo = res2.data.data || {}
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
     })
+    
   },
 
   /**

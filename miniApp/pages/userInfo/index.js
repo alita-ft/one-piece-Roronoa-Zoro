@@ -3,7 +3,8 @@ const app = getApp()
 import unitList from '../../utils/unitList'
 import {
   binding,
-  editUser
+  editUser,
+  delUser
 } from '../../utils/api'
 Page({
 
@@ -15,6 +16,7 @@ Page({
     userId: '',
     addType: 'user',
     bankId: '',
+    role: 0,
 
     disabled: true,
     showSubmit: true,
@@ -31,16 +33,23 @@ Page({
     this.data.userInfo[type] = detail
   },
   handleSubmit() {
+    let data = {}
     switch (this.data.from) {
       case 'binding':
-        let data = {
+        data = {
           ...this.data.userInfo,
-          openId: app.globalData.openid
+          openId: app.globalData.openId
+        }
+        if(!data.jobNumber){
+          wx.showToast({
+            title: '请完善信息',
+            icon:'none'
+          })
+          return
         }
         binding(data).then(res => {
-          console.log(res);
 
-          if (res.data.status != 0) {
+          if (res.data.status != 10000) {
             wx.showToast({
               title: res.data.msg,
               icon: 'none',
@@ -48,53 +57,110 @@ Page({
             return
           }
 
-          if (res.data.code == 0) {
-            app.globalData.userInfo = res.data.userInfo
-            wx.showToast({
-              title: '绑定成功',
-              icon: 'success',
-              duration: 1500,
-              success: () => {
-                setTimeout(() => {
-                  wx.navigateBack()
-                }, 1500)
-              }
-            })
-          }
+          app.globalData.userInfo = res.data.userInfo
+          wx.showToast({
+            title: '绑定成功',
+            icon: 'success',
+            duration: 1500,
+            success: () => {
+              setTimeout(() => {
+                wx.navigateBack()
+              }, 1500)
+            }
+          })
         })
         break;
       case 'edit':
-
         if (this.data.disabled) {
           this.setData({
             disabled: false,
             submitText: '保存',
           })
-          console.log(this.data.userId, this.data.userInfo);
         } else {
           console.log(this.data.userId, this.data.userInfo);
-          var pages = getCurrentPages();
-          if (pages.length > 1) {
-            //上一个页面实例对象 
-            var prePage = pages[pages.length - 2];
-            //关键在这里,这里面是触发上个界面的方法 
-            prePage.getList() // 123
+          data = {
+            ...this.data.userInfo,
+            role: this.data.role,
+            bankId: this.data.bankId,
+            userId: this.data.userId
           }
+          editUser(data).then(res => {
+            wx.showToast({
+              title: '成功',
+            })
+            setTimeout(() => {
+              var pages = getCurrentPages();
+              if (pages.length > 1) {
+                //上一个页面实例对象 
+                var prePage = pages[pages.length - 2];
+                //关键在这里,这里面是触发上个界面的方法 
+                prePage.getUserList() // 123
+                wx.navigateBack()
+              }
+            }, 1500)
+
+          })
         }
         break;
 
       case 'add':
+        if (!(this.data.userInfo.userName && this.data.userInfo.phone && this.data.userInfo.jobNumber)) {
+          wx.showToast({
+            title: '请完善信息',
+            icon: 'none'
+          })
+          return
+        }
         data = {
           ...this.data.userInfo,
           role: this.data.addType == 'user' ? 0 : 1,
           bankId: this.data.bankId
         }
+
         editUser(data).then(res => {
-          console.log(res);
+          wx.showToast({
+            title: '成功',
+          })
+          setTimeout(() => {
+            var pages = getCurrentPages();
+            if (pages.length > 1) {
+              //上一个页面实例对象 
+              var prePage = pages[pages.length - 2];
+              //关键在这里,这里面是触发上个界面的方法 
+              prePage.getUserList() // 123
+              wx.navigateBack()
+            }
+          }, 1500)
         })
       default:
         break;
     }
+  },
+  delUser() {
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该用户吗？',
+      success: (res) => {
+        if (res.confirm) {
+          delUser(this.data.userId).then(() => {
+            wx.showToast({
+              title: '成功',
+            })
+            setTimeout(() => {
+              var pages = getCurrentPages();
+              if (pages.length > 1) {
+                //上一个页面实例对象 
+                var prePage = pages[pages.length - 2];
+                //关键在这里,这里面是触发上个界面的方法 
+                prePage.getUserList() // 123
+                wx.navigateBack()
+              }
+            }, 1500)
+          })
+        } else if (res.cancel) {
+        }
+      }
+    })
 
   },
 
@@ -108,16 +174,23 @@ Page({
 
     let {
       from,
-      userId,
       addtype,
+      bankName,
       bankId,
-      bankName
+      userId,
+      userName,
+      phone,
+      jobNumber,
+      role
+
+
     } = options
     this.setData({
       bankId,
-      bankName
+      bankName,
+      role,
+      userId
     })
-    this.data.userId = userId
     this.data.addType = addtype
 
     switch (from) {
@@ -129,16 +202,16 @@ Page({
         //   this.setData({
         //     userInfo: res.data.userInfo,
         //     from,
-        //     disabled: true,
+        //     disable                                     d: true,
         //     showSubmit: true,
         //     submitText: '修改信息',
         //   })
         // })
         this.setData({
           userInfo: {
-            userName: '小强',
-            phone: '12300000000',
-            jobNumber: '0001'
+            userName,
+            phone,
+            jobNumber
           },
           from,
           disabled: true,

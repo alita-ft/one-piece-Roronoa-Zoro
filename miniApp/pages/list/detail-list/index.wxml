@@ -1,9 +1,9 @@
 <view class="list">
   <block wx:if="{{type == 'user'}}">
-    <view class="card" wx:for="{{[1,1,1,1,1,1,1,1,1]}}" wx:key='index' bindtap="toDetail">
+    <view class="card" wx:for="{{userList}}" wx:key='index' bindtap="toDetail" data-userinfo="{{item}}">
       <view class="info">
-        <view class="name">姓名：小强</view>
-        <view class="user">工号：GH123456</view>
+        <view class="name">姓名：{{item.userName}}</view>
+        <view class="user">工号：{{item.jobNumber}}</view>
       </view>
       <text class="iconfont icon-xiangyou"></text>
     </view>
@@ -20,8 +20,11 @@
     </view>
   </block>
 
+  <van-divider contentPosition="center">已全部加载</van-divider>
+
   <view class="addUser" wx:if="{{type == 'user'}}">
-    <van-button custom-style="border:none;background:#FE8419;width:45%;margin-right:15rpx;" type="primary" bind:click='addUser' data-addtype="admin">添加支行管理员</van-button>
+    <van-button custom-style="border:none;background:#FE8419;width:45%;margin-right:15rpx;" type="primary" bind:click='addUser' data-addtype="admin" wx:if="{{userInfo.role > 1}}">添加支行管理员</van-button>
     <van-button custom-style="border:none;background:#FE8419;width:45%;" type="primary" bind:click='addUser' data-addtype="user">添加支行用户</van-button>
   </view>
+
 </view>

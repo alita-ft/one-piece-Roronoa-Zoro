@@ -1,6 +1,8 @@
 // pages/list/index.js
+const app = getApp()
 import {
-  editUser
+  editUser,
+  userList
 } from '../../../utils/api'
 Page({
 
@@ -9,14 +11,25 @@ Page({
    */
   data: {
     type: 'user',
+    limit:100,//每页条数
+    offset:0, //页码
+    count:0,
+    userList:[],
+
     bankId: '',
-    bankName:''
+    bankName: '',
+    userInfo: {}
   },
 
-  toDetail() {
+
+  toDetail(e) {
     if (this.data.type == 'user') {
+      console.log(e.currentTarget.dataset);
+      let {bankName,bankId,userName,id,phone,jobNumber,role} = e.currentTarget.dataset.userinfo
+      // bankId\userName\phone\jobNumber
+      
       wx.navigateTo({
-        url: `/pages/userInfo/index?bankName=${this.data.bankName}&userId=1&from=edit`,
+        url: `/pages/userInfo/index?bankName=${this.data.bankName}&bankId=${bankId}&userName=${userName}&phone=${phone}&jobNumber=${jobNumber}&userId=${id}&from=edit&role=${role}`,
       })
     } else if (this.data.type == 'form') {
       wx.navigateTo({
@@ -33,8 +46,20 @@ Page({
       url: `/pages/userInfo/index?bankName=${this.data.bankName}&bankId=${this.data.bankId}&from=add&addtype=${addtype}`,
     })
   },
-  getList() {
-    console.log('list');
+  getUserList() {
+    let data = {
+      openId: app.globalData.openId,
+      limit: this.data.limit, //pageSize
+      offset: this.data.offset   // pageNumber
+    }
+    userList(data).then(res=>{
+      this.data.userList = res.data.data.rows
+      this.setData({
+        count:res.data.data.count,
+        userList:this.data.userList.concat(res.data.data.rows)
+      })
+      
+    })
 
   },
 
@@ -42,6 +67,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getUserList()
+    console.log(app.globalData.userInfo);
+
+
     let {
       bankName,
       bankId,
@@ -55,7 +84,8 @@ Page({
     this.setData({
       type,
       bankId,
-      bankName
+      bankName,
+      userInfo: app.globalData.userInfo
     })
   },
 

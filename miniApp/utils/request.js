@@ -55,3 +55,10 @@ export const post = (url, data) => request(
     'Authorization': `Bearer ${wx.getStorageSync('token')}`
   }
 );
+
+export const del = (url, data) => request(
+  url, data, 'delete', {
+    'content-type': 'application/json',
+    'Authorization': `Bearer ${wx.getStorageSync('token')}`
+  }
+);

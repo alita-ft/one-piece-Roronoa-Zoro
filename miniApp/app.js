@@ -10,18 +10,17 @@ App({
     // 登录
     wx.login({
       success: res => {
-        //请求自己后台获取用户openid
-        // wx.setStorageSync('openId', openId);
         let data = {
           code: res.code,
         }
         console.log(res.code);
         login(data).then(res2 => {
-          this.globalData.openid = res2.data.data.openId
+          this.globalData.openId = res2.data.data.openId
+          wx.setStorageSync('openId', res2.data.data.openId);
           // this.globalData.userInfo = res2.data.userInfo
         }).then(()=>{
-          getUserInfo(this.globalData.openid).then(res2=>{
-            this.globalData.userInfo = res2.data.data
+          getUserInfo(this.globalData.openId).then(res2=>{
+            this.globalData.userInfo = res2.data.data || {}
           })
         })
       }
@@ -40,6 +39,6 @@ App({
       phone: '',
       jobNumber: '',
     },
-    openid: ''
+    openId: ''
   }
 })

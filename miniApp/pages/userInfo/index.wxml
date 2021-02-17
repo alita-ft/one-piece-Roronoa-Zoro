@@ -36,4 +36,8 @@
   <view class="submit" wx:if="{{showSubmit}}">
     <van-button color='#FE8419' bind:click="handleSubmit">{{submitText}}</van-button>
   </view>
+
+  <view class="submit" wx:if="{{userId}}">
+    <van-button color='red' bind:click="delUser">删除用户</van-button>
+  </view>
 </view>
