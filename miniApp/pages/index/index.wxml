@@ -21,7 +21,8 @@
 
   <view class="list">
     <view class="line">
-      <view class="list-item" wx:for="{{list.line1}}" wx:key='index' bindtap="checkType" data-type="{{item.type}}" data-needbind="{{item.needBind}}">
+      <view class="list-item" wx:for="{{list.line1}}" wx:key='index' bindtap="checkType" data-type="{{item.type}}"
+        data-needbind="{{item.needBind}}">
         <view class="item-top" style="background:{{item.bgc}}">
           <image src="/imgs/list/{{item.img}}"></image>
         </view>

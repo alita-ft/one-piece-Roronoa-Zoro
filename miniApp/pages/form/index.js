@@ -1,94 +1,102 @@
 
 const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
-import unitList from '../../utils/unitList'
+import { addVisit,visitDetail } from '../../utils/api'
+import { testPhone } from '../../utils/util'
 var qqmapsdk = new QQMapWX({
   key: 'VO7BZ-HGACJ-MWJFN-KYUZZ-HGXGF-CGBAW'
 });
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    option1: unitList,
-    latitude: 0,
-    longitude: 0,
-    address: '',
-    // export const ProductInfo = {
-    //   1: {
-    //     productId: 1,
-    //     productName: '个人储蓄',
-    //   },
-    //   2: {
-    //     productId: 2,
-    //     productName: '个人理财',
-    //   },
-    //   3: {
-    //     productId: 3,
-    //     productName: '基金',
-    //   },
-    //   4: {
-    //     productId: 4,
-    //     productName: '保险',
-    //   },
-    //   5: {
-    //     productId: 5,
-    //     productName: '贵金属',
-    //   },
-    //   6: {
-    //     productId: 6,
-    //     productName: '手机银行',
-    //   },
-    //   7: {
-    //     productId: 7,
-    //     productName: '个人网银',
-    //   },
-    //   8: {
-    //     productId: 8,
-    //     productName: '企业银行',
-    //   },
-    //   9: {
-    //     productId: 9,
-    //     productName: '聚合支付',
-    //   },
-    //   10: {
-    //     productId: 10,
-    //     productName: '消费贷',
-    //   },
-    //   11: {
-    //     productId: 11,
-    //     productName: '经营贷',
-    //   },
-    //   12: {
-    //     productId: 12,
-    //     productName: '对公存款',
-    //   },
-    // };
+    id:'',
+    disabled:false,
     products: [
-      { text: '个人储蓄', checked: true },
-      { text: '个人理财', checked: false },
-      { text: '基金', checked: false },
-      { text: '保险', checked: false },
-      { text: '贵金属', checked: false },
-      { text: '手机银行', checked: false },
-      { text: '个人网银', checked: false },
-      { text: '企业银行', checked: false },
-      { text: '聚合支付', checked: false },
-      { text: '消费贷', checked: false },
-      { text: '经营贷', checked: false },
-      { text: '对公存款', checked: false }
-    ]
+      { value: 1, text: '个人储蓄', checked: false },
+      { value: 2, text: '个人理财', checked: false },
+      { value: 3, text: '基金', checked: false },
+      { value: 4, text: '保险', checked: false },
+      { value: 5, text: '贵金属', checked: false },
+      { value: 6, text: '手机银行', checked: false },
+      { value: 7, text: '个人网银', checked: false },
+      { value: 8, text: '企业银行', checked: false },
+      { value: 9, text: '聚合支付', checked: false },
+      { value: 10, text: '消费贷', checked: false },
+      { value: 11, text: '经营贷', checked: false },
+      { value: 12, text: '对公存款', checked: false }
+    ],
+    form: {
+      merchantName: '',
+      merchantOwnerPhone: '',
+      productId: '',
+      lng: '',
+      lat: '',
+      vistAddress: '',
+      star: 1
+    }
   },
 
-
-
+  inputChange(e) {
+    let { type } = e.currentTarget.dataset
+    let { value } = e.detail
+    this.data.form[type] = value
+  },
 
   checkProduct(e) {
-    console.log(e.currentTarget.dataset);
-    let { index, checked } = e.currentTarget.dataset
+    if(this.data.id){
+      return
+    }
+    let { id, checked } = e.currentTarget.dataset
+    let index = this.data.products.findIndex(v => id == v.value)
     this.data.products[index].checked = !checked
     this.setData({
       products: this.data.products
+    })
+  },
+  submit() {
+    let checnkedList = []
+    this.data.products.forEach(v => {
+      if (v.checked) {
+        checnkedList.push(v.value)
+      }
+    })
+    let productId = checnkedList.join(',')
+    let data = {
+      openId: app.globalData.openId,
+      ...this.data.form,
+      productId
+    }
+    console.log(data);
+    if (!(data.vistAddress && data.merchantName && data.merchantOwnerPhone && data.merchantOwnerName && data.productId && data.remark && data.star)) {
+      wx.showToast({
+        title: '请填写完整信息',
+        icon: 'none'
+      })
+      return
+    }
+    if (!testPhone(data.merchantOwnerPhone)) {
+      wx.showToast({
+        title: '手机号码格式错误',
+        icon: 'none'
+      })
+      return
+    }
+    addVisit(data).then(res => {
+      console.log(res);
+      if(res.data.status != 10000){
+        wx.showToast({
+          title: '提交失败',
+          icon:'none'
+        })
+        return
+      }
+      wx.showToast({
+        title: res.data.msg,
+      })
+      wx.navigateBack()
     })
   },
 
@@ -96,36 +104,47 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
-    let { type } = options
-    // type: add 、 detail
-    // if (type == 'add') {
-    //   this.getLocation()
-    // } else if (type == 'detail') {
+    let { id } = options
 
-    // }
-    wx.getLocation({
-      success: (res) => {
-
-        console.log(res.latitude, res.longitude);
-
-        qqmapsdk.reverseGeocoder({
-          location: {
-            latitude: res.latitude,
-            longitude: res.longitude
-          },
-          success: (res2) => {
-            console.log(res2.result.address);
-            this.setData({
-              latitude: res.latitude,
-              longitude: res.longitude,
-              address: res2.result.address
-            })
-          }
+    if (id) {
+      visitDetail(id).then(res=>{
+        let form = res.data.data
+        let productId = res.data.data.productId.split(',')
+        this.data.products.forEach((v1,index)=>{
+          productId.forEach(v2=>{
+            if(v1.value == v2){
+              this.data.products[index].checked = true
+            }
+          })
         })
-      }
-    })
+        this.setData({
+          id,
+          disabled:true,
+          form,
+          products:this.data.products
+        })
 
+        
+      })
+    } else {
+      wx.getLocation({
+        success: (res) => {
+          qqmapsdk.reverseGeocoder({
+            location: {
+              latitude: res.latitude,
+              longitude: res.longitude
+            },
+            success: (res2) => {
+              this.setData({
+                ['form.vistAddress']: res2.result.address,
+                ['form.lng']: res.longitude,
+                ['form.lat']: res.latitude,
+              })
+            }
+          })
+        }
+      })
+    }
   },
 
   /**

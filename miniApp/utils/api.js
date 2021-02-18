@@ -31,5 +31,15 @@ export const userList = (data) => post(`/crm/api/manager/user/list`, data)
 // 添加拜访记录
 export const addVisit = (data) => post(`/crm/api/visit/record/saveOrUpdate`, data)
 
+// 拜访列表
+export const visitListApi = (data) => post(`/crm/api/visit/record/list`, data)
+
+//删除拜访记录
+export const delVisit = (id) => del(`/crm/api/visit/record/delete/${id}`)
+
+//拜访详情
+export const visitDetail = (id) => get(`/crm/api/visit/record/search/${id}`)
+
+
 
 

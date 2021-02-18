@@ -13,7 +13,11 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : `0${n}`
 }
+const testPhone = phone =>{
+  return /^1[0-9]{10}$/.test(phone)
+}
 
 module.exports = {
-  formatTime
+  formatTime,
+  testPhone
 }

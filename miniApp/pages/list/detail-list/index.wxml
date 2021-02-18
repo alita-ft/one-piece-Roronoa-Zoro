@@ -10,11 +10,11 @@
   </block>
 
   <block wx:if="{{type == 'form'}}">
-    <view class="card" wx:for="{{[1,1,1,1]}}" wx:key='index' bindtap="toDetail">
+    <view class="card" wx:for="{{visitList}}" data-id="{{item.id}}" wx:key='index' bindtap="toDetail">
       <view class="info">
-        <view class="name">走访商户：XXX商户</view>
-        <view class="user">走访人：小强</view>
-        <view class="time">走访时间：2021-1-21 14:27:08</view>
+        <view class="name">走访商户：{{item.merchantName}}</view>
+        <view class="user">走访人：{{item.operatorName}}</view>
+        <view class="time">走访时间：{{item.createTime}}</view>
       </view>
       <text class="iconfont icon-xiangyou"></text>
     </view>

@@ -1,24 +1,39 @@
 <view class="home">
   <!-- <view>{{latitude}}--{{longitude}}</view> -->
-  <view>{{address}}</view>
+  <view>{{form.vistAddress}}</view>
   <view class="label"><text style="color:red;">* </text>商户名称：</view>
-  <input class="input" />
+  <input class="input" data-type="merchantName" bindinput="inputChange" value="{{form.merchantName}}" disabled="{{disabled}}"/>
+  <view class="label"><text style="color:red;">* </text>商户负责人：</view>
+  <input class="input" data-type="merchantOwnerName" bindinput="inputChange" value="{{form.merchantOwnerName}}" disabled="{{disabled}}"/>
   <view class="label"><text style="color:red;">* </text>商户负责人手机号码：</view>
-  <input class="input" type="number" />
+  <input class="input" type="number" maxlength="{{11}}" data-type="merchantOwnerPhone" bindinput="inputChange" value="{{form.merchantOwnerPhone}}" disabled="{{disabled}}"/>
   <view class="label"><text style="color:red;">* </text>我行产品：</view>
   <view class="products">
-    <view class="product {{item.checked?'active':''}}" wx:for="{{products}}" data-index="{{index}}"
+    <view class="product {{item.checked?'active':''}}" wx:for="{{products}}" data-id="{{item.value}}"
       data-checked="{{item.checked}}" bindtap="checkProduct">
       {{item.text}}
     </view>
   </view>
-  <view class="label"><text style="color:red;">* </text>所属支行：</view>
+  <!-- <view class="label"><text style="color:red;">* </text>所属支行：</view>
   <view id="dropdown" style="border-radius: 10rpx;overflow: hidden;margin-top:10rpx;">
-    <van-dropdown-menu>
-      <van-dropdown-item value="{{1}}" options="{{option1}}" />
+    <van-dropdown-menu >
+      <van-dropdown-item bind:change="dropdown" value="{{defaultBank}}" options="{{bankList}}" />
     </van-dropdown-menu>
-  </view>
+  </view> -->
   <view class="label"><text style="color:red;">* </text>走访备注：</view>
-  <textarea class="input textarea" placeholder="..." />
-  <button id="submit">提交</button>
+  <textarea class="input textarea" data-type="remark" bindinput="inputChange" value="{{form.remark}}" disabled="{{disabled}}"/>
+
+  <view class="label"><text style="color:red;">* </text>星级：</view>
+  <view class="products">
+    <van-rate
+      value="{{ form.star }}"
+      size="{{ 25 }}"
+      color="rgb(255, 210, 30)"
+      void-color="#eee"
+      void-icon="star"
+      bind:change="inputChange"
+      readonly="{{disabled}}"
+    />
+  </view>
+  <button id="submit" bindtap="submit" wx:if="{{!id}}">提交</button>
   </view>

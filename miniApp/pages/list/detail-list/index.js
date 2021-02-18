@@ -2,7 +2,8 @@
 const app = getApp()
 import {
   editUser,
-  userList
+  userList,
+  visitListApi
 } from '../../../utils/api'
 Page({
 
@@ -11,10 +12,12 @@ Page({
    */
   data: {
     type: 'user',
-    limit:100,//每页条数
-    offset:0, //页码
-    count:0,
-    userList:[],
+    limit: 100,//每页条数
+    offset: 0, //页码
+    count: 0,
+    userList: [],
+
+    visitList: [],
 
     bankId: '',
     bankName: '',
@@ -25,15 +28,17 @@ Page({
   toDetail(e) {
     if (this.data.type == 'user') {
       console.log(e.currentTarget.dataset);
-      let {bankName,bankId,userName,id,phone,jobNumber,role} = e.currentTarget.dataset.userinfo
+      let { bankName, bankId, userName, id, phone, jobNumber, role } = e.currentTarget.dataset.userinfo
       // bankId\userName\phone\jobNumber
-      
+
       wx.navigateTo({
         url: `/pages/userInfo/index?bankName=${this.data.bankName}&bankId=${bankId}&userName=${userName}&phone=${phone}&jobNumber=${jobNumber}&userId=${id}&from=edit&role=${role}`,
       })
     } else if (this.data.type == 'form') {
+      console.log(e.currentTarget.dataset);
+      let {id} = e.currentTarget.dataset
       wx.navigateTo({
-        url: `/pages/form/index?bankName=${this.data.bankName}&id=1`,
+        url: `/pages/form/index?bankName=${this.data.bankName}&id=${id}`,
       })
     }
   },
@@ -49,28 +54,38 @@ Page({
   getUserList() {
     let data = {
       openId: app.globalData.openId,
-      limit: this.data.limit, //pageSize
-      offset: this.data.offset   // pageNumber
+      // limit: this.data.limit, //pageSize
+      // offset: this.data.offset   // pageNumber
     }
-    userList(data).then(res=>{
-      this.data.userList = res.data.data.rows
+    userList(data).then(res => {
+      // this.data.userList = res.data.data.rows
+      // this.setData({
+      //   count: res.data.data.count,
+      //   userList: this.data.userList.concat(res.data.data.rows)
+      // })
+      let userList = res.data.data ? res.data.data.rows : []
       this.setData({
-        count:res.data.data.count,
-        userList:this.data.userList.concat(res.data.data.rows)
+        userList
       })
-      
     })
-
+  },
+  getVisitList() {
+    let data = {
+      openId: app.globalData.openId
+    }
+    visitListApi(data).then(res => {
+      console.log(res);
+      this.setData({
+        visitList:res.data.data.rows
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getUserList()
-    console.log(app.globalData.userInfo);
-
-
+    console.log(options);
     let {
       bankName,
       bankId,
@@ -87,6 +102,12 @@ Page({
       bankName,
       userInfo: app.globalData.userInfo
     })
+    console.log(type);
+    if (type == 'user') {
+      this.getUserList()
+    } else {
+      this.getVisitList()
+    }
   },
 
   /**

@@ -1,4 +1,5 @@
 const app = getApp()
+import {login,getUserInfo} from '../../utils/api'
 Page({
 
   /**
@@ -23,12 +24,12 @@ Page({
         // { needBind: true, img: 'permissions.png', name: '权限管理', bgc: '#46DCE0' },
         // { needBind: true, img: 'user.png', name: '考试排名', bgc: '#FFAA5F' },
       ]
-    }
+    },
+    userInfo: {}
   },
 
   checkType(e) {
     let { type, needbind } = e.currentTarget.dataset
-    console.log(needbind,app.globalData.userInfo);
     if (needbind && !app.globalData.userInfo.userName) {
       wx.showModal({
         title: '提示',
@@ -38,6 +39,13 @@ Page({
         success: (result) => { },
         fail: (res) => { },
         complete: (res) => { },
+      })
+      return
+    }
+    if (type == 'user' && app.globalData.userInfo.role == 0) {
+      wx.showToast({
+        title: '没有权限访问',
+        icon: 'none'
       })
       return
     }
@@ -51,8 +59,12 @@ Page({
         break;
       // 查看记录
       case 'form':
+        // wx.navigateTo({
+        //   url: '/pages/list/unit/index?type=form',
+        // })
+
         wx.navigateTo({
-          url: '/pages/list/unit/index?type=form',
+          url: `/pages/list/detail-list/index?bankName=走访列表&type=form`,
         })
         break;
       // 添加记录
@@ -65,12 +77,13 @@ Page({
       case 'export':
         wx.showModal({
           title: '提示',
-          content: '下载链接：www.xxxx.com',
+          // content: `https://www.wxinlu.com/crm/api/visit/record/list/download?openId=${app.globalData.openId}`,
+          content: '请复制地址到浏览器下载',
           confirmText: '复制',
           success(res) {
             if (res.confirm) {
               wx.setClipboardData({
-                data: 'www.baidu.com',
+                data: `https://www.wxinlu.com/crm/api/visit/record/list/download?openId=${app.globalData.openId}`,
               })
             }
           }
@@ -104,7 +117,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

@@ -36,7 +36,7 @@ Page({
    */
   onLoad: function (options) {
     let bankList = app.globalData.bankList
-    if (app.globalData.userInfo.role == 1) {
+    if (app.globalData.userInfo.role <= 1) {
       bankList = app.globalData.bankList.filter(v => v.bankName == app.globalData.userInfo.bankName)
     }
     this.setData({

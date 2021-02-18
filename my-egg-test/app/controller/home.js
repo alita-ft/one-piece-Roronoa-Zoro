@@ -5,20 +5,31 @@ const Controller = require('egg').Controller;
 class HomeController extends Controller {
   async index() {
     const { ctx } = this;
-    // ctx.cookies.set('username', 'yangqiancheng')
-    let value = ctx.cookies.get('username')
-    console.log(value);
-    await ctx.render('home', { csrf: ctx.csrf })
+    ctx.cookies.set('username', 'yqc', {
+      maxAge: 1000 * 20,
+      httpOnly: false
+    })
+    let username = ctx.cookies.get('username')
+    console.log(username);
+    // let value = ctx.cookies.get('username')
+    // await ctx.render('home', { csrf: ctx.csrf })
+    ctx.body = 'cookie'
   }
-  async add() {
-    let data = this.ctx.request.body
+  async login() {
+    this.ctx.cookies.set("token", 'qwerqqq', {
+      maxAge: 1000 * 3600 * 24,
+      httpOnly: true,
+      signed: true,
+      encrypt: true
+    })
+    this.ctx.body = 'ok'
   }
-  async API1() {
-    this.ctx.body = JSON.stringify("API1")
+  async getToken() {
+    let token = this.ctx.cookies.get('token')
+    console.log(token);
+    this.ctx.body = 'token'
   }
-  async API2() {
-    this.ctx.body = "API2"
-  }
+
 }
 
 

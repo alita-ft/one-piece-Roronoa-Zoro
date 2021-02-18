@@ -30,7 +30,7 @@ App({
     })
   },
   globalData: {
-    appid: 'wx10dd4e7d1a98bc4f',
+    appId: 'wx10dd4e7d1a98bc4f',
     bankList:[],
     userInfo: {
       userId: '',
