@@ -62,6 +62,9 @@ Page({
       //   userList: this.data.userList.concat(res.data.data.rows)
       // })
       let userList = res.data.data ? res.data.data.rows : []
+      if (userList.length > 0) {
+        userList = userList.filter(v => v.role < app.globalData.userInfo.role)
+      }
       this.setData({
         userList
       })

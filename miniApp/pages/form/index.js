@@ -1,6 +1,6 @@
 
 const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
-import { addVisit,visitDetail } from '../../utils/api'
+import { addVisit, visitDetail } from '../../utils/api'
 import { testPhone } from '../../utils/util'
 var qqmapsdk = new QQMapWX({
   key: 'VO7BZ-HGACJ-MWJFN-KYUZZ-HGXGF-CGBAW'
@@ -12,8 +12,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id:'',
-    disabled:false,
+    id: '',
+    disabled: false,
     products: [
       { value: 1, text: '个人储蓄', checked: false },
       { value: 2, text: '个人理财', checked: false },
@@ -46,7 +46,7 @@ Page({
   },
 
   checkProduct(e) {
-    if(this.data.id){
+    if (this.data.id) {
       return
     }
     let { id, checked } = e.currentTarget.dataset
@@ -70,6 +70,9 @@ Page({
       productId
     }
     console.log(data);
+    if (!data.vistAddress) {
+      this.getLocation()
+    }
     if (!(data.vistAddress && data.merchantName && data.merchantOwnerPhone && data.merchantOwnerName && data.productId && data.remark && data.star)) {
       wx.showToast({
         title: '请填写完整信息',
@@ -86,10 +89,10 @@ Page({
     }
     addVisit(data).then(res => {
       console.log(res);
-      if(res.data.status != 10000){
+      if (res.data.status != 10000) {
         wx.showToast({
           title: '提交失败',
-          icon:'none'
+          icon: 'none'
         })
         return
       }
@@ -104,30 +107,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     let { id } = options
 
     if (id) {
-      visitDetail(id).then(res=>{
+      visitDetail(id).then(res => {
         let form = res.data.data
         let productId = res.data.data.productId.split(',')
-        this.data.products.forEach((v1,index)=>{
-          productId.forEach(v2=>{
-            if(v1.value == v2){
+        this.data.products.forEach((v1, index) => {
+          productId.forEach(v2 => {
+            if (v1.value == v2) {
               this.data.products[index].checked = true
             }
           })
         })
         this.setData({
           id,
-          disabled:true,
+          disabled: true,
           form,
-          products:this.data.products
+          products: this.data.products
         })
 
-        
+
       })
     } else {
-      wx.getLocation({
+      this.getLocation()
+      /* wx.getLocation({
         success: (res) => {
           qqmapsdk.reverseGeocoder({
             location: {
@@ -143,8 +148,44 @@ Page({
             }
           })
         }
-      })
+      }) */
     }
+  },
+  getLocation() {
+    wx.getLocation({
+      success: (res) => {
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          success: (res2) => {
+            console.log(res2);
+            this.setData({
+              ['form.vistAddress']: res2.result.address,
+              ['form.lng']: res.longitude,
+              ['form.lat']: res.latitude,
+            })
+          }
+        })
+      },
+      fail: () => {
+        wx.showModal({
+          title: '提示',
+          content: '请先进行位置授权',
+          showCancel: false,
+          success: (res) => {
+            if (res.confirm) {
+              wx.openSetting({
+                success: () => {
+                  this.getLocation()
+                }
+              })
+            }
+          }
+        })
+      }
+    })
   },
 
   /**
