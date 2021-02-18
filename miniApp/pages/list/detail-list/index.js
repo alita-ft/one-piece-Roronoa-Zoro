@@ -36,7 +36,7 @@ Page({
       })
     } else if (this.data.type == 'form') {
       console.log(e.currentTarget.dataset);
-      let {id} = e.currentTarget.dataset
+      let { id } = e.currentTarget.dataset
       wx.navigateTo({
         url: `/pages/form/index?bankName=${this.data.bankName}&id=${id}`,
       })
@@ -53,9 +53,7 @@ Page({
   },
   getUserList() {
     let data = {
-      openId: app.globalData.openId,
-      // limit: this.data.limit, //pageSize
-      // offset: this.data.offset   // pageNumber
+      bankId: this.data.bankId
     }
     userList(data).then(res => {
       // this.data.userList = res.data.data.rows
@@ -71,12 +69,12 @@ Page({
   },
   getVisitList() {
     let data = {
-      openId: app.globalData.openId
+      bankId: this.data.bankId
     }
     visitListApi(data).then(res => {
       console.log(res);
       this.setData({
-        visitList:res.data.data.rows
+        visitList: res.data.data.rows
       })
     })
   },

@@ -59,13 +59,13 @@ Page({
         break;
       // 查看记录
       case 'form':
-        // wx.navigateTo({
-        //   url: '/pages/list/unit/index?type=form',
-        // })
-
         wx.navigateTo({
-          url: `/pages/list/detail-list/index?bankName=走访列表&type=form`,
+          url: '/pages/list/unit/index?type=form',
         })
+
+        // wx.navigateTo({
+        //   url: `/pages/list/detail-list/index?bankName=走访列表&type=form`,
+        // })
         break;
       // 添加记录
       case 'add':
@@ -75,6 +75,14 @@ Page({
         break;
       // 导出记录
       case 'export':
+   
+        let url = "https://www.wxinlu.com/crm/api/visit/record/list/download"
+        if(app.globalData.userInfo.role == 1){
+          url = url+`?bankId=${app.globalData.userInfo.bankId}`
+        }else if(app.globalData.userInfo.role == 2){
+          url = url+`?userId=${app.globalData.userInfo.id}`
+        }
+
         wx.showModal({
           title: '提示',
           // content: `https://www.wxinlu.com/crm/api/visit/record/list/download?openId=${app.globalData.openId}`,
@@ -83,7 +91,7 @@ Page({
           success(res) {
             if (res.confirm) {
               wx.setClipboardData({
-                data: `https://www.wxinlu.com/crm/api/visit/record/list/download?openId=${app.globalData.openId}`,
+                data: url,
               })
             }
           }
