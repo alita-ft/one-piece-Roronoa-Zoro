@@ -1,5 +1,5 @@
 const app = getApp()
-import {login,getUserInfo} from '../../utils/api'
+import { login, getUserInfo } from '../../utils/api'
 Page({
 
   /**
@@ -7,22 +7,19 @@ Page({
    */
   data: {
     banner: [
-      // { url: '/imgs/banner/111.png' },
-      { url: '/imgs/banner/222.jpg' },
-      // { url: '/imgs/banner/333.jpg' },
+      { url: '/imgs/banner/banner1.png' },
+      { url: '/imgs/banner/banner2.png' },
+      { url: '/imgs/banner/banner3.png' },
+      { url: '/imgs/banner/banner4.png' },
     ],
     list: {
       line1: [
-        { needBind: true, type: "add", img: 'form.png', name: '走访录入', bgc: '#D0E073' },
-        { needBind: true, type: "form", img: 'report.png', name: '走访列表', bgc: '#37C2FF' },
-        { needBind: true, type: "export", img: 'report.png', name: '走访导出', bgc: '#FE8419' },
-        { needBind: true, type: "user", img: 'user.png', name: '用户管理', bgc: '#FFB36E' },
-        // { needBind: true, type: "about", img: 'about.png', name: '关于我们', bgc: '#FF99BB' },
+        { needBind: true, type: "add", img: '/imgs/list/img1.png', name: '走访录入', bgc: '#D0E073' },
+        { needBind: true, type: "form", img: '/imgs/list/img2.png', name: '走访列表', bgc: '#37C2FF' }
       ],
       line2: [
-
-        // { needBind: true, img: 'permissions.png', name: '权限管理', bgc: '#46DCE0' },
-        // { needBind: true, img: 'user.png', name: '考试排名', bgc: '#FFAA5F' },
+        { needBind: true, type: "export", img: '/imgs/list/img3.png', name: '走访导出', bgc: '#FE8419' },
+        { needBind: true, type: "user", img: '/imgs/list/img4.png', name: '用户管理', bgc: '#FFB36E' }
       ]
     },
     userInfo: {}
@@ -75,12 +72,12 @@ Page({
         break;
       // 导出记录
       case 'export':
-   
+
         let url = "https://www.wxinlu.com/crm/api/visit/record/list/download"
-        if(app.globalData.userInfo.role == 1){
-          url = url+`?bankId=${app.globalData.userInfo.bankId}`
-        }else if(app.globalData.userInfo.role == 2){
-          url = url+`?userId=${app.globalData.userInfo.id}`
+        if (app.globalData.userInfo.role == 1) {
+          url = url + `?bankId=${app.globalData.userInfo.bankId}`
+        } else if (app.globalData.userInfo.role == 2) {
+          url = url + `?userId=${app.globalData.userInfo.id}`
         }
 
         wx.showModal({
@@ -126,6 +123,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log(1);
   },
 
   /**

@@ -2,11 +2,14 @@
   <!-- <view>{{latitude}}--{{longitude}}</view> -->
   <view>{{form.vistAddress}}</view>
   <view class="label"><text style="color:red;">* </text>商户名称：</view>
-  <input class="input" data-type="merchantName" bindinput="inputChange" value="{{form.merchantName}}" disabled="{{disabled}}"/>
+  <input class="input" data-type="merchantName" bindinput="inputChange" value="{{form.merchantName}}"
+    disabled="{{disabled}}" />
   <view class="label"><text style="color:red;">* </text>商户负责人：</view>
-  <input class="input" data-type="merchantOwnerName" bindinput="inputChange" value="{{form.merchantOwnerName}}" disabled="{{disabled}}"/>
+  <input class="input" data-type="merchantOwnerName" bindinput="inputChange" value="{{form.merchantOwnerName}}"
+    disabled="{{disabled}}" />
   <view class="label"><text style="color:red;">* </text>商户负责人手机号码：</view>
-  <input class="input" type="number" maxlength="{{11}}" data-type="merchantOwnerPhone" bindinput="inputChange" value="{{form.merchantOwnerPhone}}" disabled="{{disabled}}"/>
+  <input class="input" type="number" maxlength="{{11}}" data-type="merchantOwnerPhone" bindinput="inputChange"
+    value="{{form.merchantOwnerPhone}}" disabled="{{disabled}}" />
   <view class="label"><text style="color:red;">* </text>我行产品：</view>
   <view class="products">
     <view class="product {{item.checked?'active':''}}" wx:for="{{products}}" data-id="{{item.value}}"
@@ -21,7 +24,8 @@
     </van-dropdown-menu>
   </view> -->
   <view class="label"><text style="color:red;">* </text>走访备注：</view>
-  <textarea class="input textarea" data-type="remark" bindinput="inputChange" value="{{form.remark}}" disabled="{{disabled}}"/>
+  <textarea class="input textarea" data-type="remark" bindinput="inputChange" value="{{form.remark}}"
+    disabled="{{disabled}}" />
 
   <view class="label"><text style="color:red;">* </text>星级：</view>
   <view class="products">

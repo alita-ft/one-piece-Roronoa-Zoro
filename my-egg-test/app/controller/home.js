@@ -30,6 +30,12 @@ class HomeController extends Controller {
     this.ctx.body = 'token'
   }
 
+  async mongo() {
+    let res = await this.ctx.model.Projects.find()
+    console.log(res);
+    this.ctx.body = 'mongo'
+  }
+
 }
 
 

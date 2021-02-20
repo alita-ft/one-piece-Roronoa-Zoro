@@ -16,8 +16,8 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1612183670337_6375';
 
   // add your middleware config here
-  config.middleware = ['forbidIp', 'author'];
-  config.forbidIp = { whiteList: ['127.0.0.1'] }
+  // config.middleware = ['forbidIp', 'author'];
+  // config.forbidIp = { whiteList: ['127.0.0.1'] }
 
   // add your user config here
   const userConfig = {
@@ -30,6 +30,15 @@ module.exports = appInfo => {
     },
   }
   config.requestUrl = 'http://www.phonegap100.com'
+  // mongo
+  config.mongoose = {
+    client: {
+      url: 'mongodb://127.0.0.1/wgtest',  //你的数据库地址，不要端口
+      options: {
+        useNewUrlParser: true,
+      },
+    }
+  }
 
 
   return {

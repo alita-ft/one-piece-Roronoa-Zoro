@@ -7,6 +7,7 @@ module.exports = app => {
   const { router, controller } = app;
   router.get('/login', controller.user.login)
   router.post('/binding', controller.user.binding)
+  router.get('/cookie', controller.news.setCookie)
 
 
 

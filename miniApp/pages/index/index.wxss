@@ -1,3 +1,6 @@
+.swiper {
+  height: 450rpx;
+}
 .swiper-item {
   background: lightblue;
   height: 100%;
@@ -43,7 +46,7 @@
 .message .msg-info .right {
   margin-left: 20rpx;
 }
-
+/* 
 .list {
   margin-top: 10rpx;
 }
@@ -82,4 +85,47 @@
   margin-top: 10rpx;
   font-size: 28rpx;
   color: #6F6F6F;
+} */
+
+.card {
+  padding: 30rpx;
+  color: #6F6F6F;
+  font-size: 28rpx;
+}
+.card .list {
+  padding: 20rpx;
+  background:#fff;
+  border-radius: 20rpx;
+}
+.card .line {
+  display: flex;
+  justify-content: space-between;
+}
+.card .item {
+  width: 48%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.top .item {
+  height: 330rpx;
+  flex-direction: column;
+}
+.top .item image {
+  height: 180rpx;
+  width: 180rpx;
+}
+.top .item text {
+  margin-top: 20rpx;
+}
+.bottom .item {
+  height: 200rpx;
+  background: #f6f6f6;
+}
+.bottom .item image {
+  height: 90rpx;
+  width: 90rpx;
+}
+.bottom .item text {
+  margin-left: 20rpx;
 }
