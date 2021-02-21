@@ -60,20 +60,7 @@
       "list": []
     },
     "miniprogram": {
-      "list": [
-        {
-          "id": -1,
-          "name": "pages/list/detail-list/index",
-          "pathName": "pages/list/detail-list/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/userInfo/index",
-          "pathName": "pages/userInfo/index",
-          "scene": null
-        }
-      ]
+      "list": []
     }
   }
 }

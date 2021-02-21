@@ -1,5 +1,6 @@
 <view class="home">
   <!-- <view>{{latitude}}--{{longitude}}</view> -->
+  <!-- <view>{{form.vistAddress}}-{{form.lng}}-{{form.lat}}</view> -->
   <view>{{form.vistAddress}}</view>
   <view class="label"><text style="color:red;">* </text>商户名称：</view>
   <input class="input" data-type="merchantName" bindinput="inputChange" value="{{form.merchantName}}"
@@ -35,9 +36,13 @@
       color="rgb(255, 210, 30)"
       void-color="#eee"
       void-icon="star"
-      bind:change="inputChange"
+      bind:change="starChange"
       readonly="{{disabled}}"
     />
   </view>
   <button id="submit" bindtap="submit" wx:if="{{!id}}">提交</button>
+
+  <button id="submit" bindtap="submit" wx:if="{{id}}">{{submitText}}</button>
+  <button id="del" bindtap="del" wx:if="{{id}}">删除本条记录</button>
+
   </view>

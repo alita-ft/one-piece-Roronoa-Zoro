@@ -14,7 +14,7 @@
       <view class="info">
         <view class="name">走访商户：{{item.merchantName}}</view>
         <view class="user">走访人：{{item.operatorName}}</view>
-        <view class="time">走访时间：{{item.createTime}}</view>
+        <view class="time">走访时间：{{item.updateTime}}</view>
       </view>
       <text class="iconfont icon-xiangyou"></text>
     </view>

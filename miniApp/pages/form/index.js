@@ -1,6 +1,6 @@
 
 const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
-import { addVisit, visitDetail } from '../../utils/api'
+import { addVisit, delVisit, visitDetail } from '../../utils/api'
 import { testPhone } from '../../utils/util'
 var qqmapsdk = new QQMapWX({
   key: 'VO7BZ-HGACJ-MWJFN-KYUZZ-HGXGF-CGBAW'
@@ -14,6 +14,7 @@ Page({
   data: {
     id: '',
     disabled: false,
+    submitText: '修改记录',
     products: [
       { value: 1, text: '个人储蓄', checked: false },
       { value: 2, text: '个人理财', checked: false },
@@ -36,7 +37,7 @@ Page({
       lat: '',
       vistAddress: '',
       star: 1
-    }
+    },
   },
 
   inputChange(e) {
@@ -44,9 +45,12 @@ Page({
     let { value } = e.detail
     this.data.form[type] = value
   },
+  starChange(e) {
+    this.data.form.star = e.detail
+  },
 
   checkProduct(e) {
-    if (this.data.id) {
+    if (this.data.disabled) {
       return
     }
     let { id, checked } = e.currentTarget.dataset
@@ -56,7 +60,50 @@ Page({
       products: this.data.products
     })
   },
+  del() {
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除本条记录吗？',
+      success: (r) => {
+        if (r.confirm) {
+          delVisit(this.data.id).then(res => {
+            if (res.data.status != 10000) {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none'
+              })
+              return
+            }
+            wx.showToast({
+              title: res.data.msg,
+            })
+            var pages = getCurrentPages();
+            if (pages.length > 1) {
+              //上一个页面实例对象 
+              var prePage = pages[pages.length - 2];
+              //关键在这里,这里面是触发上个界面的方法 
+              prePage.getVisitList() // 123
+            }
+            wx.navigateBack()
+          })
+        }
+      }
+    })
+
+  },
   submit() {
+
+    if (this.data.id && this.data.disabled) {
+      this.setData({
+        disabled: false,
+        submitText: '保存记录'
+      })
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+      return
+    }
+
     let checnkedList = []
     this.data.products.forEach(v => {
       if (v.checked) {
@@ -64,12 +111,16 @@ Page({
       }
     })
     let productId = checnkedList.join(',')
-    let data = {
+    let data = this.data.id ? {
+      recordId: this.data.id,
       openId: app.globalData.openId,
       ...this.data.form,
       productId
-    }
-    console.log(data);
+    } : {
+        openId: app.globalData.openId,
+        ...this.data.form,
+        productId
+      }
     if (!data.vistAddress) {
       this.getLocation()
     }
@@ -88,10 +139,9 @@ Page({
       return
     }
     addVisit(data).then(res => {
-      console.log(res);
       if (res.data.status != 10000) {
         wx.showToast({
-          title: '提交失败',
+          title: res.data.msg,
           icon: 'none'
         })
         return
@@ -99,6 +149,15 @@ Page({
       wx.showToast({
         title: res.data.msg,
       })
+      if (this.data.id) {
+        var pages = getCurrentPages();
+        if (pages.length > 1) {
+          //上一个页面实例对象 
+          var prePage = pages[pages.length - 2];
+          //关键在这里,这里面是触发上个界面的方法 
+          prePage.getVisitList() // 123
+        }
+      }
       wx.navigateBack()
     })
   },
@@ -107,9 +166,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     let { id } = options
-
     if (id) {
       visitDetail(id).then(res => {
         let form = res.data.data
@@ -127,8 +184,6 @@ Page({
           form,
           products: this.data.products
         })
-
-
       })
     } else {
       this.getLocation()
@@ -153,6 +208,8 @@ Page({
   },
   getLocation() {
     wx.getLocation({
+      isHighAccuracy: true,
+      type: 'gcj02',
       success: (res) => {
         qqmapsdk.reverseGeocoder({
           location: {
@@ -160,7 +217,8 @@ Page({
             longitude: res.longitude
           },
           success: (res2) => {
-            console.log(res2);
+            console.log(res.longitude,res.latitude);
+            console.log(res);
             this.setData({
               ['form.vistAddress']: res2.result.address,
               ['form.lng']: res.longitude,

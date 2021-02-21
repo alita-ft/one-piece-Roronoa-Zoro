@@ -7,10 +7,10 @@ Page({
    */
   data: {
     banner: [
-      { url: '/imgs/banner/banner1.png' },
-      { url: '/imgs/banner/banner2.png' },
-      { url: '/imgs/banner/banner3.png' },
-      { url: '/imgs/banner/banner4.png' },
+      { url: '/imgs/banner/banner1.jpg' },
+      { url: '/imgs/banner/banner2.jpg' },
+      { url: '/imgs/banner/banner3.jpg' },
+      { url: '/imgs/banner/banner4.jpg' },
     ],
     list: {
       line1: [
