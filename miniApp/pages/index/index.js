@@ -76,9 +76,10 @@ Page({
         let url = "https://www.wxinlu.com/crm/api/visit/record/list/download"
         if (app.globalData.userInfo.role == 1) {
           url = url + `?bankId=${app.globalData.userInfo.bankId}`
-        } else if (app.globalData.userInfo.role == 2) {
+        } else if (app.globalData.userInfo.role == 0) {
           url = url + `?userId=${app.globalData.userInfo.id}`
         }
+        console.log(app.globalData.userInfo);
 
         wx.showModal({
           title: '提示',

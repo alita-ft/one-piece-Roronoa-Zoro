@@ -71,9 +71,11 @@ Page({
     })
   },
   getVisitList() {
-    let data = {
+    let data = app.globalData.userInfo.role > 0 ? {
       bankId: this.data.bankId
-    }
+    } : {
+        userId: app.globalData.userInfo.id
+      }
     visitListApi(data).then(res => {
       console.log(res);
       this.setData({
