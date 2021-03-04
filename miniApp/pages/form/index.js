@@ -124,7 +124,7 @@ Page({
     if (!data.vistAddress) {
       this.getLocation()
     }
-    if (!(data.vistAddress && data.merchantName && data.merchantOwnerPhone && data.merchantOwnerName && data.productId && data.remark && data.star)) {
+    if (!(data.vistAddress && data.merchantName && data.merchantOwnerPhone && data.merchantOwnerName && data.remark && data.star)) {
       wx.showToast({
         title: '请填写完整信息',
         icon: 'none'
